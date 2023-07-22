@@ -22,21 +22,16 @@ export function logout(){
     window.location.reload()
 }
 
-export interface Record {
-    collectionId: string;
-    collectionName: string;
-    created: string;
-    gramaje: string;
-    id: string;
-    nombre: string;
-    presentacion: string;
-    updated: string;
-    expand: {};
-  }
   
 export async function getMeds() {
-    const records = await pb.collection('Medicamento').getFullList();
+    const records = await pb.collection('Medicamento').getFullList({
+        sort: '-created',
+    });
+    return records;
+}
 
+export async function getPacs() {
+    const records = await pb.collection('Paciente').getFullList();
     return records;
 }
 
