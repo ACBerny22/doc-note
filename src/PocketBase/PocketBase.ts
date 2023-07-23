@@ -23,8 +23,8 @@ export function logout(){
 }
 
   
-export async function getMeds() {
-    const records = await pb.collection('Medicamento').getFullList({
+export async function getMeds(page: number) {
+    const records = await pb.collection('Medicamento').getList(page, 3, {
         sort: '-created',
     });
     return records;

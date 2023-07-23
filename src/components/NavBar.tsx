@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { logout, isUserValid } from "@/PocketBase/PocketBase";
+import { logout, isUserValid, model } from "@/PocketBase/PocketBase";
 import {useRouter} from "next/navigation";
 import { useState, useEffect } from "react";
 import {FiLogOut} from 'react-icons/fi'
@@ -45,7 +45,7 @@ export default function NavBar(){
     }
 
     return(
-        <div>
+        <div className="font-poppins">
             {isUserValid && domLoaded && 
             <div className="bg-blue-500 text-white">
                 <div className="p-5 flex gap-10 justify-between mx-10">
@@ -69,10 +69,13 @@ export default function NavBar(){
                         </div>
                         : null}
                         {!isMobile ? 
-                        <button className="bg-white px-5 py-2 text-blue-500 rounded-xl flex gap-2"
-                        onClick={handleLogout}>
-                            <FiLogOut className="text-xl mt-2"></FiLogOut>
-                        </button>    
+                        <div className="flex gap-5">
+                            <h1 className="mt-3 font-bold">{model?.username}</h1>
+                            <button className="bg-white px-5 py-2 text-blue-500 rounded-xl flex gap-2"
+                            onClick={handleLogout}>
+                                <FiLogOut className="text-xl mt-2"></FiLogOut>
+                            </button>    
+                        </div>
                         : <>
                            {isMenuOn ? 
                             <RxHamburgerMenu onClick={() => {setisMenuOn(!isMenuOn)}} className="text-3xl text-black mt-2 z-50"></RxHamburgerMenu>
