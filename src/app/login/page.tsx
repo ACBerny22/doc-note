@@ -33,7 +33,7 @@ export default function Login(){
                     <label htmlFor="username"
                     className="text-lg font-light text-slate-400">Nombre de Usuario:</label>
                     <input
-                    className="text-lg font-medium w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="text-lg font-medium w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent-blue focus:border-accent-blue"
                     type="text"
                     id="username"
                     value={username}
@@ -45,7 +45,7 @@ export default function Login(){
                     <label htmlFor="password"
                     className="text-lg font-light text-slate-400">Contraseña:</label>
                     <input
-                    className="text-lg font-medium w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="text-lg font-medium w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-accent-blue focus:border-accent-blue"
                     type="password"
                     id="password"
                     required={true}
@@ -53,8 +53,8 @@ export default function Login(){
                     onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit" className="bg-blue-500 w-full rounded-xl text-white text-lg py-3
-                hover:bg-blue-700 transition-all">Log In</button>
+                <button type="submit" className="bg-accent-blue w-full rounded-xl text-white text-lg py-3
+                hover:bg-primary-blue transition-all">Log In</button>
             </form>
             <p className="text-slate-400">Not a member. <span className="text-slate-600 underline">Sign In</span></p>
         </div>

@@ -17,6 +17,11 @@ module.exports = {
         'jost': ['Jost', 'sans-serif'],
         'urbanist': ['Urbanist', 'sans-serif'],
       },
+      colors: {
+        'accent-blue': '#5590AA',
+        'primary-blue': '#355A69',
+        'secondary-blue': '#dddeee',
+      },
     },
   },
   plugins: [],

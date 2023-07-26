@@ -1,7 +1,7 @@
 'use client'
 
 import { getMeds, isUserValid } from "@/PocketBase/PocketBase"
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"
 import MedTag from "@/components/MedTag";
 import {BiSearchAlt} from 'react-icons/bi'
@@ -44,8 +44,6 @@ export default function Medicamentos(){
         setCurrentPage(page);
     }
 
-
-       
     return(
         <>
         {domLoaded &&
@@ -59,7 +57,7 @@ export default function Medicamentos(){
                 </div>
                 <div className="flex justify-center gap-5 py-10">
                     <button className={`py-2 px-4 rounded flex ${
-                    (currentPage == 1) ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+                    (currentPage == 1) ? 'bg-gray-400 cursor-not-allowed' : 'bg-accent-blue hover:bg-primary-blue'
                     } text-white`}
                     onClick={() => {loadNewPage(currentPage-1)}} disabled={(currentPage == 1)}>
                         <MdOutlineNavigateBefore className="text-2xl text-white"></MdOutlineNavigateBefore>
@@ -67,9 +65,9 @@ export default function Medicamentos(){
                     </button>
                     <button
                     className={`py-2 px-4 rounded flex ${
-                        (currentPage == Math.round(totalItems/3)) ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+                        (currentPage == Math.ceil(totalItems/6)) ? 'bg-gray-400 cursor-not-allowed' : 'bg-accent-blue hover:bg-primary-blue'
                     } text-white`}
-                     onClick={() => {loadNewPage(currentPage+1)}} disabled={(currentPage == Math.round(totalItems/3))}>
+                     onClick={() => {loadNewPage(currentPage+1)}} disabled={(currentPage == Math.ceil(totalItems/6))}>
                         Siguiente
                         <MdOutlineNavigateNext className="text-2xl text-white"></MdOutlineNavigateNext>
                     </button>

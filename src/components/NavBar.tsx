@@ -45,33 +45,33 @@ export default function NavBar(){
     }
 
     return(
-        <div className="font-poppins">
+        <div className="font-poppins shadow-lg">
             {isUserValid && domLoaded && 
-            <div className="bg-blue-500 text-white">
-                <div className="p-5 flex gap-10 justify-between mx-10">
+            <div className="bg-primary-blue text-white">
+                <div className="p-5 flex gap-10 justify-between mx-10 ">
                     <div>
                         <Link href={'/dashboard'}><p className="text-3xl mt-2 font-bold">DocNote</p></Link>
                     </div>
                         {!isMobile ?      
-                        <div className="flex gap-8">
+                        <div className="flex gap-8 font-semibold">
                             <Link href={'/pacientes'}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-white hover:text-primary-blue
                              transition-all ease-in-out'>Pacientes</Link>
                             <Link href={'/medicamentos'}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-white hover:text-primary-blue
                              transition-all ease-in-out'>Medicamentos</Link>
-                            <Link href={'#'}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            <Link href={'/consultas'}
+                            className='text-lg p-3 rounded-xl hover:bg-white hover:text-primary-blue
                              transition-all ease-in-out'>Consultas</Link>
                             <Link href={'#'}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-white hover:text-primary-blue
                              transition-all ease-in-out'>Citas</Link>                    
                         </div>
                         : null}
                         {!isMobile ? 
                         <div className="flex gap-5">
                             <h1 className="mt-3 font-bold">{model?.username}</h1>
-                            <button className="bg-white px-5 py-2 text-blue-500 rounded-xl flex gap-2"
+                            <button className="bg-white px-5 py-2 text-primary-blue rounded-xl flex gap-2"
                             onClick={handleLogout}>
                                 <FiLogOut className="text-xl mt-2"></FiLogOut>
                             </button>    
@@ -88,16 +88,16 @@ export default function NavBar(){
                         <div className="fixed bg-white bottom-0 left-0 w-full h-screen flex justify-center items-center text-black">
                             <div className="flex flex-col gap-10 align-middle text-center text-xl">
                             <Link href={'/pacientes'} onClick={()=> {setisMenuOn(!isMenuOn)}}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white font-bold
                              transition-all ease-in-out'>Pacientes</Link>
                             <Link href={'/medicamentos'} onClick={()=> {setisMenuOn(!isMenuOn)}}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white font-bold
                              transition-all ease-in-out'>Medicamentos</Link>
-                            <Link href={'#'} onClick={()=> {setisMenuOn(!isMenuOn)}}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            <Link href={'/consultas'} onClick={()=> {setisMenuOn(!isMenuOn)}}
+                            className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white font-bold
                              transition-all ease-in-out'>Consultas</Link>
                             <Link href={'#'} onClick={()=> {setisMenuOn(!isMenuOn)}}
-                            className='text-lg p-3 rounded-xl font-light hover:bg-white hover:text-blue-500
+                            className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white font-bold
                              transition-all ease-in-out'>Citas</Link>  
                             </div>
                         </div>

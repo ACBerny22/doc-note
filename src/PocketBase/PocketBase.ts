@@ -1,4 +1,6 @@
 import pocketbaseEs from "pocketbase"
+import { Paciente } from "@/Procedimientos/interfaces"
+import toast, { Toaster } from 'react-hot-toast';
 
 const pb = new pocketbaseEs("https://doc-note.pockethost.io")
 export const isUserValid = pb.authStore.isValid
@@ -22,9 +24,9 @@ export function logout(){
     window.location.reload()
 }
 
-  
+   
 export async function getMeds(page: number) {
-    const records = await pb.collection('Medicamento').getList(page, 3, {
+    const records = await pb.collection('Medicamento').getList(page, 6, {
         sort: '-created',
     });
     return records;
@@ -35,3 +37,73 @@ export async function getPacs() {
     return records;
 }
 
+export async function getAPac(name: string) {
+    const records = await pb.collection('Paciente').getFirstListItem(`nombre = "${name}"`)
+    return records;
+}
+
+export async function getSinglePac(id:any) {
+    const records = await pb.collection('Paciente').getFirstListItem(`id="${id}"`)
+    return records;
+}
+
+
+export async function createPac(ss:any) {
+
+    const data = {
+        "curp": ss.curp,
+        "nombre": ss.nombre,
+        "apellidos": ss.apellidos,
+        "edad": ss.edad,
+        "fecha_nac": ss.fecha_nac + " 10:00:00.123Z",
+        "estado_civil": ss.estado_civil,
+        "sexo": ss.sexo
+    };
+
+    console.log(data);
+
+    const record = await pb.collection('Paciente').create(data)
+}
+
+
+export async function getSingleConsulta(id: string){
+    const record = await pb.collection('Consulta').getFirstListItem(`id="${id}"`, {
+        sort: '-created',
+        expand:'paciente'
+    });
+    return record;
+}
+
+export async function getConsultas() {
+    const records = await pb.collection('Consulta').getFullList({
+        sort: '-created',
+        expand:'paciente'
+    });
+
+    return records;
+}
+
+export async function createConsulta(ss: any) {
+    const data = {
+        "fecha": ss.fecha + " 10:00:00.123Z",
+        "paciente": ss.paciente,
+        "enfermedades": ss.enfermedades,
+        "motivo_consulta": ss.motivo_consulta,
+        "exp_fisica": ss.exp_fisica,
+        "isVerificada": false
+    };
+    
+    const record = await pb.collection('Consulta').create(data);
+}
+
+
+export async function getTratamiento(consulta:string){
+    const records = await pb.collection('Tratamiento').getList(1, 4, {
+        sort: '-created',
+        filter: `consulta="${consulta}"`,
+        expand:'medicamento'
+    });
+
+    return records;
+    
+}
