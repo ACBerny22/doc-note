@@ -4,6 +4,7 @@ import { FC, use, useEffect, useState } from 'react'
 import { getSingleConsulta, getTratamiento } from '@/PocketBase/PocketBase'
 import {Consulta, Tratamiento} from '@/Procedimientos/interfaces'
 import { formatDateToFullDate } from '@/Procedimientos/conversiones'
+import TratAddButton from '@/components/TratAddButton'
 import MedTag from '@/components/MedTag'
 
 const Component: FC = ({params} : any) => {
@@ -45,6 +46,7 @@ const Component: FC = ({params} : any) => {
         <div>
             <h1 className='text-3xl font-medium mb-10'>Tratamiento</h1>
             <div className='grid grid-cols-1 gap-5 lg:grid-cols-4'>
+                <TratAddButton id={params.id}></TratAddButton>
                 {tratamiento.map((item) => (
                     <MedTag key={item.id} id={item.id} nombre={item.expand.medicamento.nombre} gramaje={item.expand.medicamento.gramaje} 
                     presentacion={item.expand.medicamento.presentacion} indicaciones={item.indicaciones}></MedTag>

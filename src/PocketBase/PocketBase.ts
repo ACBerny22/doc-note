@@ -32,18 +32,31 @@ export async function getMeds(page: number) {
     return records;
 }
 
+export async function getFilteredMeds(name: string) {
+    const resultList = await pb.collection('Medicamento').getList(1, 10, {
+        filter:`nombre~"${name}"`
+    }).catch(() => console.log("jss"));
+
+    return resultList;
+}
+
 export async function getPacs() {
     const records = await pb.collection('Paciente').getFullList();
     return records;
 }
 
-export async function getAPac(name: string) {
-    const records = await pb.collection('Paciente').getFirstListItem(`nombre = "${name}"`)
+export async function searchPacs(name: string) {
+    const records = await pb.collection('Paciente').getList( 1, 10, { filter: `nombre ~ "${name}"`})
     return records;
 }
 
 export async function getSinglePac(id:any) {
     const records = await pb.collection('Paciente').getFirstListItem(`id="${id}"`)
+    return records;
+}
+
+export async function getPacByCurp(curp:string) {
+    const records = await pb.collection('Paciente').getFirstListItem(`curp~"${curp}"`)
     return records;
 }
 
@@ -73,6 +86,21 @@ export async function getSingleConsulta(id: string){
     });
     return record;
 }
+
+export async function searchConsulta(crup: string){
+
+    const paciente = await getPacByCurp(crup)
+
+    console.log(paciente.id);
+    
+    const record = await pb.collection('Consulta').getFirstListItem(`paciente="${paciente.id}"`, {
+        sort: '-created',
+        expand:'paciente'
+    })    
+
+    return record;
+}
+
 
 export async function getConsultas() {
     const records = await pb.collection('Consulta').getFullList({
@@ -105,5 +133,16 @@ export async function getTratamiento(consulta:string){
     });
 
     return records;
-    
 }
+
+export async function createTratamiento(consulta:any, medicamento:string, indicaciones:string){
+    const data = {
+        "consulta": consulta,
+        "medicamento": medicamento,
+        "indicaciones": indicaciones
+    };
+    
+    const record = await pb.collection('Tratamiento').create(data);
+}
+
+

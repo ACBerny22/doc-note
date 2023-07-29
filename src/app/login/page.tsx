@@ -56,7 +56,7 @@ export default function Login(){
                 <button type="submit" className="bg-accent-blue w-full rounded-xl text-white text-lg py-3
                 hover:bg-primary-blue transition-all">Log In</button>
             </form>
-            <p className="text-slate-400">Not a member. <span className="text-slate-600 underline">Sign In</span></p>
+            <p className="text-slate-400">Not a member. <span className="text-slate-600 underline">Contact Me</span></p>
         </div>
     )
 }

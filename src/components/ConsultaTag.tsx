@@ -3,6 +3,7 @@ import { formatDateToFullDate } from "@/Procedimientos/conversiones";
 import { Paciente } from "@/Procedimientos/interfaces";
 import {GoUnverified, GoVerified} from 'react-icons/go'
 
+
 interface ConsultaTagProps {
     id: string;
     paciente: Paciente;
@@ -12,8 +13,6 @@ interface ConsultaTagProps {
 
 
 const ConsultaTag: React.FC<ConsultaTagProps> = ({ id, paciente, fecha, isVerificada }) => {
-
-    console.log(isVerificada)
 
     return(
         <Link className="flex shadow-lg rounded-xl bg-white hover:-translate-y-3 transition-all ease-out"

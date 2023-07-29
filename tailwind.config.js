@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -18,9 +19,9 @@ module.exports = {
         'urbanist': ['Urbanist', 'sans-serif'],
       },
       colors: {
-        'accent-blue': '#5590AA',
-        'primary-blue': '#355A69',
-        'secondary-blue': '#dddeee',
+        'accent-blue': '#257aa8',
+        'primary-blue': '#0a4073',
+        'secondary-blue': '#e9eef5',
       },
     },
   },

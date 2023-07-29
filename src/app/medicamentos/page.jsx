@@ -48,8 +48,8 @@ export default function Medicamentos(){
         <>
         {domLoaded &&
         
-            <div className="flex gap-16 flex-col mx-10 mt-10 font-poppins">
-                <h1 className="text-4xl font-bold">Medicamentos</h1>
+            <div className="flex gap-16 flex-col p-16 font-poppins">
+                <h1 className="text-4xl font-light">Medicamentos</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                     {meds.map((item) => (
                         <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} presentacion={item.presentacion}></MedTag>
