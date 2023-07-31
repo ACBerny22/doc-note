@@ -37,7 +37,7 @@ export default function ConsultaPage(){
     }, [])
 
     async function findOne() {
-        const data = await searchConsulta(searchTerm) as unknown as Consulta;
+        const data = await searchConsulta(searchTerm).catch(() => toast.error("CURP no valido")) as unknown as Consulta;
         const dataArray = [data]
         setConsultas(dataArray)
         console.log(data)
@@ -50,7 +50,7 @@ export default function ConsultaPage(){
 
 
     return(
-        <div className="flex flex-col gap-10 p-16 font-poppins">
+        <div className="flex flex-col gap-10 p-5 md:p-16 font-poppins">
             <Toaster />
             <h1 className="text-4xl font-light">Consultas</h1>
             <div className="flex gap-2">
@@ -67,19 +67,19 @@ export default function ConsultaPage(){
                         onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <button type="submit"
-                            className="bg-accent-blue p-3 text-white rounded-xl">Buscar
+                            className="bg-blue-600 p-3 text-white rounded-xl">Buscar
                         </button>
                         
                 </form>
                 <button onClick={async () => { await load()}}>
-                    <BiRefresh className="text-4xl text-accent-blue"></BiRefresh>
+                    <BiRefresh className="text-4xl text-blue-600"></BiRefresh>
                 </button>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-10">
-                {consultas.map((item) => (
+      
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
+                { Object.prototype.toString.call(consultas[0]) === "[object Object]" ? ( consultas.map((item) => (
                     <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTag>
-                ))}
+                ))) : null}
             </div>
         </div>
     )

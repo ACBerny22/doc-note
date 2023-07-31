@@ -57,31 +57,39 @@ const NewRecordForm: React.FC = () => {
       className={'flex flex-col gap-3 '}>
         <div>
           <input type="text" name="curp" value={formValues.curp} onChange={handleChange} placeholder='CURP'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl '/>
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+            />
         </div>
         <div>
           <input type="text" name="nombre" value={formValues.nombre} onChange={handleChange} placeholder='Nombre'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+
+          />
         </div>
         <div>
           <input type="text" name="apellidos" value={formValues.apellidos} onChange={handleChange} placeholder='Apelldios'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+           />
         </div>
         <div>
           <input type="text" name="sexo" value={formValues.sexo} onChange={handleChange} placeholder='Sexo'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+           className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+           />
         </div>
         <div>
           <input type="number" name="edad" value={formValues.edad} onChange={handleChange} placeholder='Edad'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'
+          />
         </div>
         <div>
           <input type="date" name="fecha_nac" value={formValues.fecha_nac} onChange={handleChange}
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'
+          />
         </div>
         <div>
           <input type="text" name="estado_civil" value={formValues.estado_civil} onChange={handleChange} placeholder='Estado Civil'
-          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'/>
+          className='p-4 text-lg border-2 focus:border-accent-blue focus:outline-none focus:ring-blue-500 rounded-xl'
+          />
         </div>
         <button type="submit" className='bg-accent-blue p-4 text-white font-semibold text-lg rounded-xl
         hover:bg-primary-blue'>Registrar</button>

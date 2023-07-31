@@ -6,7 +6,9 @@ import { useRouter } from "next/navigation"
 import MedTag from "@/components/MedTag";
 import {BiSearchAlt} from 'react-icons/bi'
 import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from 'react-icons/md'
-import LoadingScreen from "@/components/LoadingScreen";
+import MedAddButton from "@/components/MedAddButton";
+import {MdAdd} from 'react-icons/md'
+
 
 export default function Medicamentos(){
     
@@ -48,16 +50,18 @@ export default function Medicamentos(){
         <>
         {domLoaded &&
         
-            <div className="flex gap-16 flex-col p-16 font-poppins">
+            <div className="flex gap-16 flex-col p-5 md:px-16 font-poppins">
                 <h1 className="text-4xl font-light">Medicamentos</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <MedAddButton></MedAddButton>
                     {meds.map((item) => (
-                        <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} presentacion={item.presentacion}></MedTag>
+                        <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} 
+                        presentacion={item.presentacion}></MedTag>
                     ))}
                 </div>
-                <div className="flex justify-center gap-5 py-10">
+                <div className="flex justify-center gap-5 py-1">
                     <button className={`py-2 px-4 rounded flex ${
-                    (currentPage == 1) ? 'bg-gray-400 cursor-not-allowed' : 'bg-accent-blue hover:bg-primary-blue'
+                    (currentPage == 1) ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-primary-blue'
                     } text-white`}
                     onClick={() => {loadNewPage(currentPage-1)}} disabled={(currentPage == 1)}>
                         <MdOutlineNavigateBefore className="text-2xl text-white"></MdOutlineNavigateBefore>
@@ -65,7 +69,7 @@ export default function Medicamentos(){
                     </button>
                     <button
                     className={`py-2 px-4 rounded flex ${
-                        (currentPage == Math.ceil(totalItems/6)) ? 'bg-gray-400 cursor-not-allowed' : 'bg-accent-blue hover:bg-primary-blue'
+                        (currentPage == Math.ceil(totalItems/6)) ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-primary-blue'
                     } text-white`}
                      onClick={() => {loadNewPage(currentPage+1)}} disabled={(currentPage == Math.ceil(totalItems/6))}>
                         Siguiente

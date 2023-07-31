@@ -1,10 +1,11 @@
 import pocketbaseEs from "pocketbase"
-import { Paciente } from "@/Procedimientos/interfaces"
+import { Paciente, Medicamento } from "@/Procedimientos/interfaces"
 import toast, { Toaster } from 'react-hot-toast';
 
-const pb = new pocketbaseEs("https://doc-note.pockethost.io")
+const pb = new pocketbaseEs(process.env.DB_URL)
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
+
 
 export async function login(username: string, password: string){
     const authData = await pb.collection('users').authWithPassword(
@@ -24,12 +25,26 @@ export function logout(){
     window.location.reload()
 }
 
+export async function getUserImage(){
+    const url = `https://doc-note.pockethost.io/api/files/users/t55vftwp3426d8o/aaron_K8EUGPIbvb.png`
+    console.log(url);
+    const res = await fetch(url);
+    const imageBlob = await res.blob();
+    const imageObjectUrl = URL.createObjectURL(imageBlob);
+
+    return imageObjectUrl;
+}
+
    
 export async function getMeds(page: number) {
     const records = await pb.collection('Medicamento').getList(page, 6, {
         sort: '-created',
     });
     return records;
+}
+
+export async function addMeds(data:any) {
+    const record = await pb.collection('Medicamento').create(data);
 }
 
 export async function getFilteredMeds(name: string) {
@@ -40,8 +55,10 @@ export async function getFilteredMeds(name: string) {
     return resultList;
 }
 
-export async function getPacs() {
-    const records = await pb.collection('Paciente').getFullList();
+export async function getPacs(page: number) {
+    const records = await pb.collection('Paciente').getList(page, 6, {
+        sort: '-created',
+    });
     return records;
 }
 
@@ -96,8 +113,8 @@ export async function searchConsulta(crup: string){
     const record = await pb.collection('Consulta').getFirstListItem(`paciente="${paciente.id}"`, {
         sort: '-created',
         expand:'paciente'
-    })    
-
+    })
+  
     return record;
 }
 

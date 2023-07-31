@@ -21,8 +21,8 @@ const ConsultaTag: React.FC<ConsultaTagProps> = ({ id, paciente, fecha, isVerifi
                 {isVerificada ? <GoVerified className="text-white text-3xl"></GoVerified> : <GoUnverified  className="text-white text-3xl"></GoUnverified>}
             </div>
             <div className="flex flex-col gap-8 font-poppins p-10 rounded-2xl">
-                <p className="font-medium text-xl">{paciente.nombre} {paciente.apellidos}</p>
-                <p className="font-medium"><span className="text-slate-600">Fecha: </span>{formatDateToFullDate(fecha)}</p>
+                <p className="font-medium text-lg">{paciente.nombre} {paciente.apellidos}</p>
+                <p className="font-light">Fecha:<span className="text-slate-600 font-medium"> {formatDateToFullDate(fecha)}</span></p>
             </div>
         </Link>
     )

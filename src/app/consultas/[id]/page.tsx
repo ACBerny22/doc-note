@@ -1,7 +1,7 @@
 'use client'
 
 import { FC, use, useEffect, useState } from 'react'
-import { getSingleConsulta, getTratamiento } from '@/PocketBase/PocketBase'
+import { getSingleConsulta, getTratamiento, model } from '@/PocketBase/PocketBase'
 import {Consulta, Tratamiento} from '@/Procedimientos/interfaces'
 import { formatDateToFullDate } from '@/Procedimientos/conversiones'
 import TratAddButton from '@/components/TratAddButton'

@@ -2,6 +2,8 @@
 import { useState, FormEvent, useEffect } from "react"
 import { login, isUserValid } from "@/PocketBase/PocketBase";
 import { useRouter } from "next/navigation";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function Login(){
 
@@ -14,7 +16,7 @@ export default function Login(){
     const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Call the onSubmit callback with the entered username and password
-    await login(username, password)
+    await login(username, password).catch(() => toast.error('Error en las credenciales.'))
   };
 
     useEffect(() => {
@@ -26,7 +28,7 @@ export default function Login(){
     return(
         <div className="flex flex-col gap-16 items-center justify-center h-screen font-poppins">
             <h1 className="font-bold text-2xl">Log In</h1>
-        
+            <Toaster />
             <form onSubmit={handleSubmit}
             className="flex flex-col gap-7 items-center justify-center">
                 <div className="flex flex-col gap-3">
