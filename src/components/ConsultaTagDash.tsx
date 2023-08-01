@@ -15,7 +15,7 @@ interface ConsultaTagProps {
 const ConsultaTag: React.FC<ConsultaTagProps> = ({ id, paciente, fecha, isVerificada }) => {
 
     return(
-        <Link className="flex shadow-lg rounded-xl bg-white hover:-translate-y-3 transition-all ease-out"
+        <Link className="flex shadow-sm rounded-xl bg-white hover:-translate-y-3 transition-all ease-out"
         href={`consultas/${id}`}>
             <div className={`flex items-center  rounded-tl-lg rounded-bl-lg ${isVerificada ? 'bg-green-500/70 px-5' : 'bg-yellow-500/70 px-5' }`}>
                 {isVerificada ? <GoVerified className="text-white text-3xl"></GoVerified> : <GoUnverified  className="text-white text-3xl"></GoUnverified>}

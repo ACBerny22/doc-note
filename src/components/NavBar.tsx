@@ -8,7 +8,9 @@ import {FiLogOut} from 'react-icons/fi'
 import {MdClose, MdOutlineNightlightRound, MdWbSunny} from 'react-icons/md'
 import {GrClose} from 'react-icons/gr'
 import {RxHamburgerMenu} from 'react-icons/rx'
-import {FaUserInjured} from 'react-icons/fa'
+import {FaChild, FaNotesMedical} from 'react-icons/fa'
+import {BsBookmarkHeart} from 'react-icons/bs'
+import {GiMedicines} from 'react-icons/gi'
 import {useDarkStore} from '@/states/themeProvider';
 
 export default function NavBar(){
@@ -69,17 +71,17 @@ export default function NavBar(){
                         {!isMobile ?      
                         <div className="flex gap-8 font-light">
                             <Link href={'/pacientes'}
-                            className='text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
-                             transition-all ease-in-out'>Pacientes</Link>
+                            className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
+                             transition-all ease-in-out'><FaChild className="text-2xl"></FaChild>Pacientes</Link>
                             <Link href={'/medicamentos'}
-                            className='text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
-                             transition-all ease-in-out'>Medicamentos</Link>
+                            className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
+                             transition-all ease-in-out'><GiMedicines className="text-2xl"></GiMedicines>Medicamentos</Link>
                             <Link href={'/consultas'}
-                            className='text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
-                             transition-all ease-in-out'>Consultas</Link>
+                            className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
+                             transition-all ease-in-out'><FaNotesMedical className="text-2xl"></FaNotesMedical>Consultas</Link>
                             <Link href={'#'}
-                            className='text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
-                             transition-all ease-in-out'>Citas</Link>                    
+                            className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
+                             transition-all ease-in-out'><BsBookmarkHeart className="text-2xl"></BsBookmarkHeart>Citas</Link>                    
                         </div>
                         : null}
                         {!isMobile ? 

@@ -4,19 +4,19 @@ import { getMeds, isUserValid } from "@/PocketBase/PocketBase"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"
 import MedTag from "@/components/MedTag";
-import {BiSearchAlt} from 'react-icons/bi'
 import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from 'react-icons/md'
 import MedAddButton from "@/components/MedAddButton";
-import {MdAdd} from 'react-icons/md'
+import {useTotalPac} from '@/states/statsProvider'
 
 
 export default function Medicamentos(){
     
     const router = useRouter()
+    const {totalPacs, setTotalPacs} = useTotalPac()
     const [domLoaded, setDomLoaded] = useState(false)
     const [meds, setMeds] = useState([])
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalItems, setTotalItems] = useState();
+    const [currentPage, setCurrentPage] = useState(1)
+    const [totalItems, setTotalItems] = useState()
 
     useEffect(() => {
         if(!isUserValid){
@@ -28,6 +28,7 @@ export default function Medicamentos(){
         async function loadMeds(){
           const data = await getMeds(currentPage);
           console.log(data.totalItems);
+          setTotalPacs(5);
           setMeds(data.items);
           setTotalItems(data.totalItems);
         }
@@ -52,7 +53,7 @@ export default function Medicamentos(){
         
             <div className="flex gap-16 flex-col p-5 md:px-16 font-poppins">
                 <h1 className="text-4xl font-light">Medicamentos</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
                     <MedAddButton></MedAddButton>
                     {meds.map((item) => (
                         <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} 

@@ -134,8 +134,8 @@ export async function searchConsultaPerPaciente(id: string){
 }
 
 
-export async function getConsultas() {
-    const records = await pb.collection('Consulta').getFullList({
+export async function getConsultas(page:number, perPage:number) {
+    const records = await pb.collection('Consulta').getList(page, perPage,{
         sort: '-created',
         expand:'paciente',
     });

@@ -15,13 +15,15 @@ export default function ConsultaPage(){
     const [consultas, setConsultas] = useState<Consulta[]>([]);
     const [domLoaded, setDomLoaded] = useState(false)
     const [searchTerm, setSearchTerm] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+    const [perPage, setPerPage] = useState(6)
     const [childValue, setChildValue] = useState<string>('');
 
     const router = useRouter();
 
     async function load(){
-       const data:any =  await getConsultas()
-       setConsultas(data);
+       const data:any =  await getConsultas(currentPage, perPage)
+       setConsultas(data.items);
     }
 
     useEffect(() => {
@@ -48,7 +50,7 @@ export default function ConsultaPage(){
 
 
     return(
-        <div className="flex flex-col gap-10 p-5 md:p-16 font-poppins">
+        <div className="flex flex-col gap-12 p-5 md:px-16 font-poppins">
             <Toaster />
             <h1 className="text-4xl font-light">Consultas</h1>
             <div className="flex gap-2">
@@ -60,7 +62,7 @@ export default function ConsultaPage(){
                         type="date"
                         required={true}
                         placeholder="Buscar por CURP"
-                        className="p-2  w-full bg-secondary-blue rounded-xl text-zinc-700 focus:outline-none"
+                        className="p-2  w-full bg-zinc-100 dark:bg-gray-600 rounded-lg text-zinc-700 focus:outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         />
