@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { getConsultas, searchConsulta, isUserValid } from "@/PocketBase/PocketBase"
+import { getConsultas, searchConsultaByDate, isUserValid } from "@/PocketBase/PocketBase"
 import ConsultaTag from '@/components/ConsultaTag'
 import { useRouter } from "next/navigation";
 import { Consulta } from "@/Procedimientos/interfaces";
@@ -19,10 +19,8 @@ export default function ConsultaPage(){
 
     const router = useRouter();
 
-
-
     async function load(){
-       const data =  await loadConsultas()
+       const data:any =  await getConsultas()
        setConsultas(data);
     }
 
@@ -37,9 +35,9 @@ export default function ConsultaPage(){
     }, [])
 
     async function findOne() {
-        const data = await searchConsulta(searchTerm).catch(() => toast.error("CURP no valido")) as unknown as Consulta;
+        const data:any = await searchConsultaByDate(searchTerm).catch(() => toast.error("Fecha no valida")) as unknown as Consulta;
         const dataArray = [data]
-        setConsultas(dataArray)
+        setConsultas(data)
         console.log(data)
     }
 
@@ -59,7 +57,7 @@ export default function ConsultaPage(){
                         className="text-2xl mt-2"
                         />
                         <input
-                        type="text"
+                        type="date"
                         required={true}
                         placeholder="Buscar por CURP"
                         className="p-2  w-full bg-secondary-blue rounded-xl text-zinc-700 focus:outline-none"

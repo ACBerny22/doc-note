@@ -2,7 +2,7 @@ import pocketbaseEs from "pocketbase"
 import { Paciente, Medicamento } from "@/Procedimientos/interfaces"
 import toast, { Toaster } from 'react-hot-toast';
 
-const pb = new pocketbaseEs(process.env.DB_URL)
+const pb = new pocketbaseEs("https://doc-note.pockethost.io")
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
 
@@ -78,7 +78,7 @@ export async function getPacByCurp(curp:string) {
 }
 
 
-export async function createPac(ss:any) {
+export async function createPac(ss:any, user:any) {
 
     const data = {
         "curp": ss.curp,
@@ -87,7 +87,11 @@ export async function createPac(ss:any) {
         "edad": ss.edad,
         "fecha_nac": ss.fecha_nac + " 10:00:00.123Z",
         "estado_civil": ss.estado_civil,
-        "sexo": ss.sexo
+        "sexo": ss.sexo,
+        "user": [
+            user
+        ]
+        
     };
 
     console.log(data);
@@ -104,38 +108,50 @@ export async function getSingleConsulta(id: string){
     return record;
 }
 
-export async function searchConsulta(crup: string){
+export async function searchConsultaByDate(fecha: string){
 
-    const paciente = await getPacByCurp(crup)
+    fecha = fecha + " 10:00:00"
+    console.log(fecha)
 
-    console.log(paciente.id);
-    
-    const record = await pb.collection('Consulta').getFirstListItem(`paciente="${paciente.id}"`, {
+    const records = await pb.collection('Consulta').getFullList({
         sort: '-created',
+        filter: `fecha~"${fecha}"`,
         expand:'paciente'
+
     })
-  
-    return record;
+
+    return records;
+}
+
+export async function searchConsultaPerPaciente(id: string){
+
+    const records = await pb.collection('Consulta').getFullList({
+        sort: '-created',
+        filter: `paciente="${id}"`,
+    })
+
+    return records;
 }
 
 
 export async function getConsultas() {
     const records = await pb.collection('Consulta').getFullList({
         sort: '-created',
-        expand:'paciente'
+        expand:'paciente',
     });
 
     return records;
 }
 
-export async function createConsulta(ss: any) {
+export async function createConsulta(ss: any, user:any) {
     const data = {
         "fecha": ss.fecha + " 10:00:00.123Z",
         "paciente": ss.paciente,
         "enfermedades": ss.enfermedades,
         "motivo_consulta": ss.motivo_consulta,
         "exp_fisica": ss.exp_fisica,
-        "isVerificada": false
+        "isVerificada": false,
+        "usuario": user
     };
     
     const record = await pb.collection('Consulta').create(data);

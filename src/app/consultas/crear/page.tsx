@@ -3,7 +3,7 @@
 import { FC } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {useState, useEffect} from 'react'
-import { getSinglePac, createConsulta } from '@/PocketBase/PocketBase'
+import { getSinglePac, createConsulta, model } from '@/PocketBase/PocketBase'
 import { Paciente } from '@/Procedimientos/interfaces'
 
 interface ComponentProps {}
@@ -54,7 +54,7 @@ const Component: FC<ComponentProps> = ({}) => {
         event.preventDefault();
         // Here you can submit the form data to your backend or perform other actions.
         console.log(formData);
-        await createConsulta(formData);
+        await createConsulta(formData, model?.id);
         // Reset the form after submission
         setFormData({
           fecha: '',
@@ -73,65 +73,78 @@ const Component: FC<ComponentProps> = ({}) => {
         onSubmit={handleSubmit}
         className="max-w-md mx-auto mt-8 p-4 font-poppins"
       >
-        <div className="mb-4">  
-            <h1 className='text-center my-10 text-2xl font-bold'>Nueva Consulta</h1>
-          
+        <h1 className='text-center my-10 text-2xl font-bold'>Nueva Consulta</h1>
+        <div className="mb-4">
+          <label htmlFor="fecha" className="block text-gray-700 font-bold mb-2">
+            Fecha:
+          </label>  
           <input
             type="date"
             id="fecha"
             name="fecha"
             value={formData.fecha}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-5 focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <div className="mb-4">
-          
+          <label htmlFor="paciente" className="block text-gray-700 font-bold mb-2">
+            Paciente:
+          </label>
           <input
             type="text"
             id="paciente"
             name="paciente"
             value={formData.paciente}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-5 focus:outline-none focus:border-blue-500" placeholder='Paciente'
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <div className="mb-4">
+          <label htmlFor="enfermedades" className="block text-gray-700 font-bold mb-2">
+            Enfemedades:
+          </label>
           <input
             type="text"
             id="enfermedades"
             name="enfermedades"
             value={formData.enfermedades}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-5 focus:outline-none focus:border-blue-500" placeholder='Enfermedades'
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <div className="mb-4">
+          <label htmlFor="motivo_consulta" className="block text-gray-700 font-bold mb-2">
+            Motivo de Consulta:
+          </label>
           <textarea
             id="motivo_consulta"
             name="motivo_consulta"
             required={true}
             value={formData.motivo_consulta}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-5 focus:outline-none focus:border-blue-500" placeholder='Motivo de Consulta'
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <div className="mb-4">
-          
+          <label htmlFor="exp_fisica" className="block text-gray-700 font-bold mb-2">
+            Exploración Física:
+          </label>
           <textarea
             id="exp_fisica"
             name="exp_fisica"
             required={true}
             value={formData.exp_fisica}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-5 focus:outline-none focus:border-blue-500" placeholder='Exploracion Fisica'
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
         <button
           type="submit"
-          className="bg-accent-blue text-white p-5 rounded hover:bg-primary-blue focus:outline-none w-full"
+          className='bg-blue-600 p-4 text-white font-semibold text-lg rounded-xl
+        hover:bg-blue-700'
         >
-          Submit
+          Crear
         </button>
       </form>
     )

@@ -50,11 +50,13 @@ export default function NavBar(){
         setIsDropdownOpen(false);
         setisMenuOn(false);
         await logout(); 
+
     }
 
     const handleDropdownToggle = () => {
         setIsDropdownOpen(!isDropdownOpen);
-      };
+    };
+
 
     return(
         <div className={`${isDark ? 'dark' : ''} font-poppins text-zinc-900`}>
