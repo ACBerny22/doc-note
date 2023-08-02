@@ -61,7 +61,7 @@ export default function NavBar(){
 
 
     return(
-        <div className={`${isDark ? 'dark' : ''} font-poppins text-zinc-900`}>
+        <div className={`${isDark ? 'dark' : ''} text-zinc-900`}>
             {isUserValid && domLoaded && 
             <div className={`bg-white dark:bg-gray-800 dark:text-white`}>
                 <div className="p-10 flex gap-10 justify-between lg:mx-10 ">
@@ -118,7 +118,7 @@ export default function NavBar(){
                               ? 'opacity-100 scale-100'
                               : 'opacity-0 scale-95 pointer-events-none'
                           }`}>
-                            <div className="flex flex-col gap-16 items-center justify-center text-center">
+                            <div className="flex flex-col gap-20 items-center justify-center text-center">
                                 <div className="flex justify-center items-center flex-col gap-3">    
                                     <div className="relative w-24 h-24 hover:scale-110 transition-all hover:opacity-70">
                                         <img onClick={handleDropdownToggle}
@@ -129,16 +129,16 @@ export default function NavBar(){
                                 <div className="flex flex-col gap-5 font-light">
                                     <Link href={'/pacientes'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
-                                    transition-all ease-in-out'>Pacientes</Link>
+                                    transition-all ease-in-out flex gap-2 justify-center items-center'><FaChild className="text-2xl"></FaChild>Pacientes</Link>
                                     <Link href={'/medicamentos'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
-                                    transition-all ease-in-out'>Medicamentos</Link>
+                                    transition-all ease-in-out flex gap-2 justify-center items-center'><GiMedicines className="text-2xl"></GiMedicines>Medicamentos</Link>
                                     <Link href={'/consultas'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
-                                    transition-all ease-in-out'>Consultas</Link>
+                                    transition-all ease-in-out flex gap-2 justify-center items-center'><FaNotesMedical className="text-2xl"></FaNotesMedical>Consultas</Link>
                                     <Link href={'#'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
-                                    transition-all ease-in-out'>Citas</Link>  
+                                    transition-all ease-in-out flex gap-2 justify-center items-center'><BsBookmarkHeart className="text-2xl"></BsBookmarkHeart>Citas</Link>  
                                 </div>
                                 <div className="flex gap-20 items-center">
                                     <MdOutlineNightlightRound className="cursor-pointer text-2xl"></MdOutlineNightlightRound>

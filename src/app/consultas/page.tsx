@@ -50,7 +50,7 @@ export default function ConsultaPage(){
 
 
     return(
-        <div className="flex flex-col gap-12 p-5 md:px-16 font-poppins">
+        <div className="flex flex-col gap-12 p-5 md:px-16">
             <Toaster />
             <h1 className="text-4xl font-light">Consultas</h1>
             <div className="flex gap-2">

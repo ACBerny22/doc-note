@@ -57,10 +57,10 @@ const Component: FC<ComponentProps> = ({}) => {
 
 
   return (
-    <div className='font-poppins md:p-10'>  
+    <div className='md:p-10'>  
       <h1 className='mx-10 text-3xl font-light'>Añadir Tratamiento</h1>
       <div className='grid grid-cols-1 lg:grid-cols-2'>
-        <div className='flex flex-col gap-10 m-10 font-poppins'>
+        <div className='flex flex-col gap-10 m-10 '>
         <h1 className='text-xl font-medium'>Busqueda de Medicamentos</h1>
         <form onSubmit={handleSubmit}>   
         <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -75,7 +75,7 @@ const Component: FC<ComponentProps> = ({}) => {
             onChildValueChange={handleTagClick}></MedTag>
           ))}
         </div>
-        <div className='flex flex-col gap-10 m-10 font-poppins'>
+        <div className='flex flex-col gap-10 m-10'>
           <div className='flex gap-10'>
             <h1 className='text-xl font-medium'>Indicaciones: {childValue} </h1> 
             <MdDeleteForever className='text-red-500/80 text-3xl' onClick={handleReset}></MdDeleteForever> 

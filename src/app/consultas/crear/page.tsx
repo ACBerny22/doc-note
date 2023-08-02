@@ -71,7 +71,7 @@ const Component: FC<ComponentProps> = ({}) => {
     return (
         <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto mt-8 p-4 font-poppins"
+        className="max-w-md mx-auto mt-8 p-4"
       >
         <h1 className='text-center my-10 text-2xl font-bold'>Nueva Consulta</h1>
         <div className="mb-4">

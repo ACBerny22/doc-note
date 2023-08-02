@@ -6,6 +6,8 @@ import {Consulta, Tratamiento} from '@/Procedimientos/interfaces'
 import { formatDateToFullDate } from '@/Procedimientos/conversiones'
 import TratAddButton from '@/components/TratAddButton'
 import MedTag from '@/components/MedTag'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Component: FC = ({params} : any) => {
     
@@ -28,6 +30,7 @@ const Component: FC = ({params} : any) => {
     return (
 
     <div className='flex flex-col gap-20 m-10'>
+        <Toaster></Toaster>
         <div className='flex flex-col gap-5'>    
             <h1 className='text-3xl font-medium mb-10'>Consulta: {formatDateToFullDate(consulta?.fecha!)}</h1> 
             <div>

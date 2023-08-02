@@ -52,7 +52,7 @@ export default function Pacientes(){
     
     return(
         <div className={`${ isDark ? 'dark' : ""}` }>
-            <div className={`flex gap-12 flex-col p-5 md:px-16 font-poppins dark:bg-gray-800 dark:text-white`}>    
+            <div className={`flex gap-12 flex-col p-5 md:px-16 dark:bg-gray-800 dark:text-white`}>    
                 <h1 className="text-4xl font-light">Pacientes</h1>
                 <div className="flex gap-2 w-full ">    
                         <BiSearchAlt

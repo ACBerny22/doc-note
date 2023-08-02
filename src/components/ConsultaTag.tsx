@@ -20,7 +20,7 @@ const ConsultaTag: React.FC<ConsultaTagProps> = ({ id, paciente, fecha, isVerifi
             <div className={`flex items-center  rounded-tl-lg rounded-bl-lg ${isVerificada ? 'bg-green-500/70 px-5' : 'bg-yellow-500/70 px-5' }`}>
                 {isVerificada ? <GoVerified className="text-white text-3xl"></GoVerified> : <GoUnverified  className="text-white text-3xl"></GoUnverified>}
             </div>
-            <div className="flex flex-col gap-4 font-poppins p-10 rounded-2xl">
+            <div className="flex flex-col gap-4 p-10 rounded-2xl">
                 <p className="font-medium text-lg">{paciente.nombre} {paciente.apellidos}</p>
                 <p className="font-light">Fecha:<span className="text-slate-600 font-medium"> {fecha.slice(0,10)}</span></p>
             </div>

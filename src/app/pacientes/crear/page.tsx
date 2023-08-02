@@ -50,7 +50,7 @@ const NewRecordForm: React.FC = () => {
   };
 
   return (
-    <div className='font-poppins p-5'>
+    <div className='p-5'>
       <Toaster />
       <form onSubmit={handleSubmit}
       className="max-w-sm mx-auto mt-8">

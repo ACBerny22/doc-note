@@ -26,7 +26,7 @@ export default function Login(){
     }, [])
 
     return(
-        <div className="flex flex-col gap-16 items-center justify-center h-screen font-poppins">
+        <div className="flex flex-col gap-16 items-center justify-center h-screen">
             <h1 className="font-bold text-2xl">Log In</h1>
             <Toaster />
             <form onSubmit={handleSubmit}

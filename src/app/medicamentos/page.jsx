@@ -7,6 +7,7 @@ import MedTag from "@/components/MedTag";
 import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from 'react-icons/md'
 import MedAddButton from "@/components/MedAddButton";
 import {useTotalPac} from '@/states/statsProvider'
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function Medicamentos(){
@@ -51,7 +52,8 @@ export default function Medicamentos(){
         <>
         {domLoaded &&
         
-            <div className="flex gap-16 flex-col p-5 md:px-16 font-poppins">
+            <div className="flex gap-16 flex-col p-5 md:px-16">
+                <Toaster></Toaster>
                 <h1 className="text-4xl font-light">Medicamentos</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
                     <MedAddButton></MedAddButton>

@@ -38,7 +38,7 @@ const MedicamentoForm: React.FC<MedicamentoFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className='font-poppins'>
+    <div className=''>
         <h1 className='mx-auto'>Registrar nuevo medicamento</h1>
         <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-8">
         <div className="mb-4">

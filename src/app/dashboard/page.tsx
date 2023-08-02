@@ -52,7 +52,7 @@ export default function Dashboard(){
     <>
     {domLoaded && (
         
-        <main className="p-5 md:p-16 font-poppins flex flex-col gap-16">
+        <main className="p-5 md:p-16 flex flex-col gap-16">
             <h1 className="font-bold text-4xl">Bienvenido {model?.username}</h1>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 <DashCard total={totalPacs} color={'#4f46e5'} type={"Pacientes"} icon={<FaChild className="text-5xl text-white"/>}></DashCard>
