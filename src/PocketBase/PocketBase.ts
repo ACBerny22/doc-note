@@ -1,8 +1,8 @@
-import pocketbaseEs from "pocketbase"
+import PocketBase  from "pocketbase"
 import { Paciente, Medicamento } from "@/Procedimientos/interfaces"
 import toast, { Toaster } from 'react-hot-toast';
 
-const pb = new pocketbaseEs("https://doc-note.pockethost.io")
+const pb = new PocketBase('https://doc-note.pockethost.io')
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
 
@@ -157,6 +157,14 @@ export async function createConsulta(ss: any, user:any) {
     const record = await pb.collection('Consulta').create(data);
 }
 
+export async function verifyConsulta(id:string) {
+    const data = {
+        "isVerificada": true,
+    };
+    
+    const record = await pb.collection('Consulta').update(id, data);
+}
+
 
 export async function getTratamiento(consulta:string){
     const records = await pb.collection('Tratamiento').getList(1, 4, {
@@ -178,4 +186,7 @@ export async function createTratamiento(consulta:any, medicamento:string, indica
     const record = await pb.collection('Tratamiento').create(data);
 }
 
+export async function deleteTratamiento(id:any) {
+    const deleted =  await pb.collection('Tratamiento').delete(id);
+}
 

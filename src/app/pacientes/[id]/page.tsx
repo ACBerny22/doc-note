@@ -39,7 +39,7 @@ export default function Pacientes({params} : pageProps){
     }
 
     return(
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 font-poppins p-5 lg:p-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 p-5 lg:p-10">
             <div className="flex flex-col gap-10 p-12 rounded-xl shadow-xl">
                 <h1 className="text-3xl font-semibold">{paciente?.nombre} {paciente?.apellidos}</h1>
                 <div className="flex gap-2 text-lg">

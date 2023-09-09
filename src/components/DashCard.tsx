@@ -10,8 +10,6 @@ interface DashCardProps {
 }
 
 
-
-
 const DashCard: FC<DashCardProps> = ({total, type, icon, color}) => {
 
     const [contador, setContador] = useState(0);

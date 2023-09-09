@@ -123,8 +123,8 @@ const NewRecordForm: React.FC = () => {
             <option value="S">S</option>
           </select>
         </div>
-        <button type="submit" className='bg-blue-600 p-4 text-white font-semibold text-lg rounded-xl
-        hover:bg-primary-blue'>Registrar</button>
+        <button type="submit" className='bg-blue-600 p-4 text-white font-semibold rounded-xl
+        hover:bg-blue-700'>Registrar</button>
       </form>
     </div>
   );

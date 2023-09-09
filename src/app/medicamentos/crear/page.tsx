@@ -38,8 +38,7 @@ const MedicamentoForm: React.FC<MedicamentoFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <div className=''>
-        <h1 className='mx-auto'>Registrar nuevo medicamento</h1>
+    <div className='p-5'>
         <form onSubmit={handleSubmit} className="max-w-sm mx-auto mt-8">
         <div className="mb-4">
             <label htmlFor="nombre" className="block text-gray-700 font-bold mb-2">
@@ -85,8 +84,9 @@ const MedicamentoForm: React.FC<MedicamentoFormProps> = ({ onSubmit }) => {
         </div>
         <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-        >
+            className='bg-blue-600 p-4 text-white font-semibold rounded-xl
+            hover:bg-blue-700'
+            >
             Guardar
         </button>
         </form>

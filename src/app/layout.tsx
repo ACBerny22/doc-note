@@ -3,16 +3,16 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
-import { Rubik, Outfit } from 'next/font/google'
+import {Outfit, Montserrat, Wix_Madefor_Display} from 'next/font/google'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-const rubik = Rubik({
+const wix = Wix_Madefor_Display({
   subsets:['latin'],
 })
 
-const outfit = Outfit({
+const montse = Montserrat({
   subsets:['latin'],
 })
 
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
   
-      <body className={outfit.className}>
+      <body className={wix.className}>
         <NavBar/>
         {children}
       </body>

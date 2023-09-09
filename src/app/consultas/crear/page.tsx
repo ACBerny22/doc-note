@@ -69,11 +69,11 @@ const Component: FC<ComponentProps> = ({}) => {
 
 
     return (
+      <div className='p-5'> 
         <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto mt-8 p-4"
-      >
-        <h1 className='text-center my-10 text-2xl font-bold'>Nueva Consulta</h1>
+        className="max-w-sm mx-auto mt-8"
+        >
         <div className="mb-4">
           <label htmlFor="fecha" className="block text-gray-700 font-bold mb-2">
             Fecha:
@@ -141,12 +141,13 @@ const Component: FC<ComponentProps> = ({}) => {
         </div>
         <button
           type="submit"
-          className='bg-blue-600 p-4 text-white font-semibold text-lg rounded-xl
+          className='bg-blue-600 p-4 text-white font-semibold rounded-xl
         hover:bg-blue-700'
         >
           Crear
         </button>
       </form>
+      </div>
     )
 }
 

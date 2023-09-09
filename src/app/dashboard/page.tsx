@@ -33,20 +33,17 @@ export default function Dashboard(){
         const cons:any = await getConsultas(1, 2)
         setTotalCons(cons.totalItems)
         setConsultas(cons.items)
-
-
-
     }
 
     useEffect(() => {
         setDomLoaded(true);
+            
+        if(!isUserValid){
+            router.push('/login')
+        }
+        
         loadStats();
     }, [])
-
-
-    if(!isUserValid){
-        router.push('/login')
-    }
     
     return(
     <>
@@ -83,13 +80,9 @@ export default function Dashboard(){
                                 <ConsultaTagDash key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTagDash>))
                             }
                     </div>
-
                 </div>
             </div>
-        
-            
         </main>
-
     )}
     </>
     )

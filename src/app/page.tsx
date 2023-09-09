@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "../../node_modules/next/link"
-import { useRouter } from "../../node_modules/next/navigation"
+import { useRouter } from "next/navigation"
 import {isUserValid} from "../PocketBase/PocketBase"
 
 export default function Home() {
@@ -10,16 +10,17 @@ export default function Home() {
   const router = useRouter();
   
   useEffect(() => {
+    if(!isUserValid){
+      router.push('/login')
+    }
+  
+    if(isUserValid){
+      router.push('/dashboard')
+    }
     
   },[])
   
-  if(!isUserValid){
-    router.push('/login')
-  }
-
-  if(isUserValid){
-    router.push('/dashboard')
-  }
+ 
   
   return (
     <main>

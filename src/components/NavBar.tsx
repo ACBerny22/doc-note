@@ -64,7 +64,7 @@ export default function NavBar(){
         <div className={`${isDark ? 'dark' : ''} text-zinc-900`}>
             {isUserValid && domLoaded && 
             <div className={`bg-white dark:bg-gray-800 dark:text-white`}>
-                <div className="p-10 flex gap-10 justify-between lg:mx-10 ">
+                <div className="p-5 flex gap-10 justify-between mx-0 lg:mx-10">
                     <div>
                         <Link href={'/dashboard'}><p className="text-3xl mt-2 font-bold">DocNote</p></Link>
                     </div>
@@ -86,11 +86,11 @@ export default function NavBar(){
                         : null}
                         {!isMobile ? 
                         <div className="flex gap-5">
-                            <div className="cursor-pointer relative w-14 h-14 hover:scale-110 transition-all hover:opacity-70">
+                            <div className="cursor-pointer relative w-12 h-12 hover:scale-110 transition-all hover:opacity-70">
                                 <img onClick={handleDropdownToggle}
                                 src={`https://doc-note.pockethost.io/api/files/users/${model?.id}/${model?.avatar}`} alt="Image" className="w-full h-full object-cover rounded-full"/>
                             </div>
-                            <div className={`absolute top-24 right-16 bg-white p-3 rounded-xl shadow-lg z-50
+                            <div className={`absolute top-20 right-10 bg-white p-3 rounded-xl shadow-lg z-50
                              transition-all font-light flex flex-col gap-2 ${
                                 isDropdownOpen
                                   ? 'opacity-100 scale-100'
