@@ -13,6 +13,7 @@ interface FormData {
     paciente: any;
     enfermedades: string;
     motivo_consulta: string;
+    diagnostico:string;
     exp_fisica: string;
     isVerificada: boolean;
   }
@@ -40,6 +41,7 @@ const Component: FC<ComponentProps> = ({}) => {
         paciente: idPac,
         enfermedades: '',
         motivo_consulta: '',
+        diagnostico:'',
         exp_fisica: '',
         isVerificada: false,
       });
@@ -63,6 +65,7 @@ const Component: FC<ComponentProps> = ({}) => {
           paciente: '',
           enfermedades: '',
           motivo_consulta: '',
+          diagnostico:'',
           exp_fisica: '',
           isVerificada: false,
         });
@@ -137,6 +140,19 @@ const Component: FC<ComponentProps> = ({}) => {
             name="exp_fisica"
             required={true}
             value={formData.exp_fisica}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="diagnostico" className="block text-gray-700 font-bold mb-2">
+          Diagnóstico:
+          </label>
+          <input
+            id="diagnostico"
+            name="diagnostico"
+            required={true}
+            value={formData.diagnostico}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
           />

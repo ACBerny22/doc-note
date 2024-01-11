@@ -24,8 +24,14 @@ export interface Medicamento{
     presentacion:string
 }
 
+//Para cuando se tiene que hacer expand a la consulta.
 export interface ExpandMedicamento{
     medicamento:Medicamento
+}
+
+//Para cuando se tiene que hacer expand a la consulta.
+export interface ExpandConsulta{
+    consulta:Consulta
 }
 
 
@@ -36,16 +42,24 @@ export interface  Consulta{
       fecha:string
       motivo_consulta:string
       exp_fisica:string
+      diagnostico:string
       paciente:string
       expand:ExpandPaciente
       isVerificada:boolean
 }
 
 //Tratamiento
-
 export interface Tratamiento{
     id:string
     consulta:string
+    medicamento:string
+    expand:ExpandMedicamento
+    indicaciones:string
+}
+
+export interface TratamientoDocument{
+    id:string
+    consulta:ExpandConsulta
     medicamento:string
     expand:ExpandMedicamento
     indicaciones:string

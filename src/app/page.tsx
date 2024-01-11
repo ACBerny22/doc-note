@@ -1,14 +1,6 @@
-'use client'
-
-import { useEffect } from "react";
 import Link from "../../node_modules/next/link"
-import { useRouter } from "next/navigation"
-import {isUserValid} from "../PocketBase/PocketBase"
 
 export default function Home() {
-
-  const router = useRouter();
-  
   
   return (
     <main>

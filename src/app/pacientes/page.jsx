@@ -1,12 +1,11 @@
 'use client'
 
-import { getPacs, isUserValid, searchPacs, model } from "@/PocketBase/PocketBase"
+import { getPacs, searchPacs } from "@/PocketBase/PocketBase"
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation"
 import PatientTag from "@/components/PatientTag";
 import {BiSearchAlt, BiRefresh} from 'react-icons/bi'
 import PacAddButton from "@/components/PacAddButton";
-import { useDarkStore } from "@/states/themeProvider";
 import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from 'react-icons/md'
 import LoadingScreen from "@/components/LoadingScreen";
 
@@ -19,8 +18,6 @@ export default function Pacientes(){
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
     const [totalItems, setTotalItems] = useState();
-
-    const {isDark, setIsDark} = useDarkStore()
 
     async function loadPacs(){
         const data = await getPacs(currentPage);
@@ -54,7 +51,7 @@ export default function Pacientes(){
     }
     
     return(
-        <div className={`${ isDark ? 'dark' : ""}` }>
+        <div className={``}>
             <div className={`flex gap-12 flex-col px-5 py-12 md:px-16 dark:bg-gray-800 dark:text-white`}>    
                 <h1 className="text-4xl font-light">Pacientes</h1>
                 <div className="flex gap-2 w-full ">    

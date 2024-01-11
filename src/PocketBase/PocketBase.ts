@@ -1,9 +1,7 @@
 import PocketBase  from "pocketbase"
-import { Paciente, Medicamento } from "@/Procedimientos/interfaces"
-import toast, { Toaster } from 'react-hot-toast';
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-export const pb = new PocketBase('https://doc-note.pockethost.io')
+export const pb = new PocketBase(process.env.NEXT_PUBLIC_DB_URL)
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
 
@@ -163,6 +161,7 @@ export async function createConsulta(ss: any, user:any) {
         "enfermedades": ss.enfermedades,
         "motivo_consulta": ss.motivo_consulta,
         "exp_fisica": ss.exp_fisica,
+        "diagnostico":ss.diagnostico,
         "isVerificada": false,
         "usuario": user
     };
@@ -184,6 +183,16 @@ export async function getTratamiento(consulta:any){
         sort: '-created',
         filter: `consulta="${consulta}"`,
         expand:'medicamento'
+    });
+
+    return records;
+}
+
+export async function getTratamientoWithConsulta(consulta:any){
+    const records = await pb.collection('Tratamiento').getList(1, 4, {
+        sort: '-created',
+        filter: `consulta="${consulta}"`,
+        expand:'medicamento, consulta'
     });
 
     return records;

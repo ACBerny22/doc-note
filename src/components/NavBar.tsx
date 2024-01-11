@@ -16,7 +16,6 @@ import { useCookies } from "react-cookie";
 
 export default function NavBar(){
 
-    const router = useRouter();
     const [domLoaded, setDomLoaded] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isMenuOn, setisMenuOn] = useState(false);
