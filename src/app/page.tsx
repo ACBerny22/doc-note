@@ -9,18 +9,6 @@ export default function Home() {
 
   const router = useRouter();
   
-  useEffect(() => {
-    if(!isUserValid){
-      router.push('/login')
-    }
-  
-    if(isUserValid){
-      router.push('/dashboard')
-    }
-    
-  },[])
-  
- 
   
   return (
     <main>

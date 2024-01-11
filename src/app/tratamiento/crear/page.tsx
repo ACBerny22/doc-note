@@ -4,7 +4,7 @@ import { FC, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { getFilteredMeds, createTratamiento } from '@/PocketBase/PocketBase'
 import { Medicamento } from '@/Procedimientos/interfaces'
-import MedTag from '@/components/MedTagTrat'
+import MedTagTrat from '@/components/MedTagTrat'
 import {MdDeleteForever} from "react-icons/md"
 import { useRouter } from 'next/navigation'
 
@@ -71,8 +71,8 @@ const Component: FC<ComponentProps> = ({}) => {
           </div>
         </form>
           {meds.map((item) => (
-            <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} presentacion={item.presentacion} indicaciones={" "}
-            onChildValueChange={handleTagClick}></MedTag>
+            <MedTagTrat key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} presentacion={item.presentacion} indicaciones={" "}
+            onChildValueChange={handleTagClick}></MedTagTrat>
           ))}
         </div>
         <div className='flex flex-col gap-10 m-10'>

@@ -31,8 +31,8 @@ const DashCard: FC<DashCardProps> = ({total, type, icon, color}) => {
             {icon} 
         </div>
         <div className='flex flex-col gap-5 p-5'>
-            <h1 className='text-lg font-semibold'>{type}:</h1>
-            <p className='text-5xl font-light'>{contador}</p>
+            <h1 className='text-lg font-medium'>{type}:</h1>
+            <p className='text-5xl font-extrabold'>{contador}</p>
         </div>
     </div>
   )

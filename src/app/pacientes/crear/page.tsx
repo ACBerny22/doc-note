@@ -52,8 +52,9 @@ const NewRecordForm: React.FC = () => {
   return (
     <div className='p-5'>
       <Toaster />
+      <h1 className='text-center font-bold text-2xl'>Ingresar datos del paciente</h1>
       <form onSubmit={handleSubmit}
-      className="max-w-sm mx-auto mt-8">
+      className="max-w-sm mx-auto mt-8 border p-5 rounded-xl">
         <div  className="mb-4">
           <label htmlFor="curp" className="block text-gray-700 font-bold mb-2">
             CURP:
@@ -123,8 +124,8 @@ const NewRecordForm: React.FC = () => {
             <option value="S">S</option>
           </select>
         </div>
-        <button type="submit" className='bg-blue-600 p-4 text-white font-semibold rounded-xl
-        hover:bg-blue-700'>Registrar</button>
+        <button type="submit" className=' bg-blue-600 p-4 text-white font-semibold rounded-xl
+        hover:bg-blue-700 w-full'>Registrar</button>
       </form>
     </div>
   );

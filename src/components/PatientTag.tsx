@@ -17,7 +17,6 @@ interface PatientTagProps {
 const PatientTag: React.FC<PatientTagProps> = ({id, nombre, apellidos, edad, sexo, curp}) => {
 
     const {isDark} = useDarkStore()
-
     return(
         <Link href={`/pacientes/${id}`} className={`${isDark ? 'dark' : '' } hover:-translate-y-3 transition-all ease-out`}>
             <div className='flex shadow-lg rounded-xl bg-white dark:bg-gray-700'>

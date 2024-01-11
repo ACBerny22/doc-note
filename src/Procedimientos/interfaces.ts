@@ -50,3 +50,9 @@ export interface Tratamiento{
     expand:ExpandMedicamento
     indicaciones:string
 }
+
+export interface Cita{
+    id:string
+    expand:ExpandPaciente
+    fecha:string
+}

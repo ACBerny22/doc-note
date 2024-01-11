@@ -3,20 +3,25 @@ import { useState, FormEvent, useEffect } from "react"
 import { login, isUserValid } from "@/PocketBase/PocketBase";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from 'react-hot-toast';
-
+import { useCookies } from "react-cookie";
+import { pb } from "@/PocketBase/PocketBase";
 
 export default function Login(){
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [cookies, setCookie] = useCookies(['pb_auth']);
 
     const router = useRouter()
-
+    
 
     const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Call the onSubmit callback with the entered username and password
     await login(username, password).catch(() => toast.error('Error en las credenciales.'))
+    setCookie('pb_auth', pb.authStore.exportToCookie({httpOnly:true}));
+
+
   };
 
     useEffect(() => {

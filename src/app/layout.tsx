@@ -3,17 +3,18 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
-import {Outfit, Montserrat, Wix_Madefor_Display} from 'next/font/google'
+import {Outfit, Manrope, Wix_Madefor_Display, Lato} from 'next/font/google'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-const wix = Wix_Madefor_Display({
+const open = Manrope({
   subsets:['latin'],
 })
 
-const montse = Montserrat({
+const roboto = Lato({
   subsets:['latin'],
+  weight:["100", "300", "400", "700", "900"]
 })
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
   
-      <body className={wix.className}>
+      <body className={open.className}>
         <NavBar/>
         {children}
       </body>

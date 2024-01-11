@@ -1,7 +1,7 @@
 'use client'
 
 import { FC } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import {useState, useEffect} from 'react'
 import { getSinglePac, createConsulta, model } from '@/PocketBase/PocketBase'
 import { Paciente } from '@/Procedimientos/interfaces'
@@ -19,6 +19,8 @@ interface FormData {
 
 
 const Component: FC<ComponentProps> = ({}) => {
+
+    const router = useRouter()
 
     async function load(){
         const data:any = await getSinglePac(idPac);
@@ -64,9 +66,9 @@ const Component: FC<ComponentProps> = ({}) => {
           exp_fisica: '',
           isVerificada: false,
         });
+
+        router.push('/consultas')
       };
-
-
 
     return (
       <div className='p-5'> 

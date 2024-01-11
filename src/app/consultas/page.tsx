@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { Consulta } from "@/Procedimientos/interfaces";
 import {BiSearchAlt, BiRefresh} from 'react-icons/bi'
 import toast, { Toaster } from 'react-hot-toast';
-import { loadConsultas } from "@/server_actions/loads";
 
 
 export default function ConsultaPage(){
@@ -37,7 +36,8 @@ export default function ConsultaPage(){
     }, [])
 
     async function findOne() {
-        const data:any = await searchConsultaByDate(searchTerm).catch(() => toast.error("Fecha no valida")) as unknown as Consulta;
+        const data:any = await searchConsultaByDate(searchTerm).catch(() => 
+        toast.error("Fecha no valida")) as unknown as Consulta;
         const dataArray = [data]
         setConsultas(data)
         console.log(data)
@@ -50,7 +50,7 @@ export default function ConsultaPage(){
 
 
     return(
-        <div className="flex flex-col gap-12 p-5 md:px-16">
+        <div className="flex flex-col gap-12 px-5 py-12 md:px-16">
             <Toaster />
             <h1 className="text-4xl font-light">Consultas</h1>
             <div className="flex gap-2">
@@ -62,7 +62,8 @@ export default function ConsultaPage(){
                         type="date"
                         required={true}
                         placeholder="Buscar por CURP"
-                        className="p-2  w-full bg-zinc-100 dark:bg-gray-600 rounded-lg text-zinc-700 focus:outline-none"
+                        className="p-2  w-full bg-zinc-100 dark:bg-gray-600 rounded-lg 
+                        text-zinc-700 focus:outline-none"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -78,7 +79,9 @@ export default function ConsultaPage(){
       
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
                 { Object.prototype.toString.call(consultas[0]) === "[object Object]" ? ( consultas.map((item) => (
-                    <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTag>
+                    <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} 
+                    paciente={item.expand.paciente} isVerificada={item.isVerificada}>
+                    </ConsultaTag>
                 ))) : null}
             </div>
         </div>

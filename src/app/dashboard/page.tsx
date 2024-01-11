@@ -8,7 +8,7 @@ import DashCard from "@/components/DashCard"
 import { MdAccountCircle } from "react-icons/md"
 import {FaChild, FaNotesMedical} from 'react-icons/fa'
 import {GiMedicines} from 'react-icons/gi'
-import ConsultaTagDash from '@/components/ConsultaTagDash'
+import ConsultaTag from "@/components/ConsultaTag"
 import { Consulta } from "@/Procedimientos/interfaces"
 
 export default function Dashboard(){
@@ -37,10 +37,6 @@ export default function Dashboard(){
 
     useEffect(() => {
         setDomLoaded(true);
-            
-        if(!isUserValid){
-            router.push('/login')
-        }
         
         loadStats();
     }, [])
@@ -50,7 +46,7 @@ export default function Dashboard(){
     {domLoaded && (
         
         <main className="p-5 md:p-16 flex flex-col gap-16">
-            <h1 className="font-bold text-4xl">Bienvenido {model?.username}</h1>
+            <h1 className="font-light text-4xl">Bienvenido <span className="font-extrabold">{model?.username}</span></h1>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                 <DashCard total={totalPacs} color={'#4f46e5'} type={"Pacientes"} icon={<FaChild className="text-5xl text-white"/>}></DashCard>
                 <DashCard total={totalMeds} color={'#2563eb'} type={"Medicamentos"} icon={<GiMedicines className="text-5xl text-white"/>}></DashCard>
@@ -65,19 +61,19 @@ export default function Dashboard(){
                     <div className="grid grid-cols-1 gap-5">
                         {
                             consultas.map((item) => (
-                            <ConsultaTagDash key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTagDash>))
+                            <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTag>))
                         }
                     </div>
                 </div>
                 <div className="flex flex-col gap-10 xl:col-span-2 p-5 shadow-lg rounded-xl">
                     <div className="flex justify-between">
-                        <h1 className="text-xl font-semibold">Consultas Recientes</h1>
+                        <h1 className="text-xl font-semibold">Citas proximas</h1>
                         <Link href={'/consultas'} className='font-light text-blue-600'>Ver todas</Link>
                     </div>
                         <div className="grid grid-cols-1 gap-5">
                             {
                                 consultas.map((item) => (
-                                <ConsultaTagDash key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTagDash>))
+                                <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTag>))
                             }
                     </div>
                 </div>

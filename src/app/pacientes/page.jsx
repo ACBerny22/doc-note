@@ -8,11 +8,13 @@ import {BiSearchAlt, BiRefresh} from 'react-icons/bi'
 import PacAddButton from "@/components/PacAddButton";
 import { useDarkStore } from "@/states/themeProvider";
 import {MdOutlineNavigateNext, MdOutlineNavigateBefore} from 'react-icons/md'
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function Pacientes(){
    
     const router = useRouter()
     const [domLoaded, setDomLoaded] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [pacs, setPacs] = useState([])
     const [searchTerm, setSearchTerm] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
@@ -24,16 +26,17 @@ export default function Pacientes(){
         const data = await getPacs(currentPage);
         setPacs(data.items);
         setTotalItems(data.totalItems);
-
+        setIsLoading(false)
       }
 
     useEffect(() => {
-        if(!isUserValid){
-            router.push('/login')
-        }
-
+        
+        setIsLoading(true)
         setDomLoaded(true);
         loadPacs();
+
+        setDomLoaded(true);
+
 
     }, [])
 
@@ -52,7 +55,7 @@ export default function Pacientes(){
     
     return(
         <div className={`${ isDark ? 'dark' : ""}` }>
-            <div className={`flex gap-12 flex-col p-5 md:px-16 dark:bg-gray-800 dark:text-white`}>    
+            <div className={`flex gap-12 flex-col px-5 py-12 md:px-16 dark:bg-gray-800 dark:text-white`}>    
                 <h1 className="text-4xl font-light">Pacientes</h1>
                 <div className="flex gap-2 w-full ">    
                         <BiSearchAlt
@@ -71,13 +74,17 @@ export default function Pacientes(){
                             <BiRefresh className="text-4xl text-slate-600 dark:text-gray-900"></BiRefresh>
                         </button>
                 </div>
-                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                        <PacAddButton></PacAddButton>
-                        {pacs.map((item) => (
-                            <PatientTag key={item.id} id={item.id} nombre={item.nombre} apellidos={item.apellidos} edad={item.edad} sexo={item.sexo}
-                            fecha_nac={item.fecha_nac.slice(0, 10)} curp={item.curp}></PatientTag>
-                        ))}
-                </div>
+                {isLoading ? 
+                    <LoadingScreen></LoadingScreen> 
+                    :
+                    <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            <PacAddButton></PacAddButton>
+                            {pacs.map((item) => (
+                                <PatientTag key={item.id} id={item.id} nombre={item.nombre} apellidos={item.apellidos} edad={item.edad} sexo={item.sexo}
+                                fecha_nac={item.fecha_nac.slice(0, 10)} curp={item.curp}></PatientTag>
+                            ))}
+                    </div>
+                }
                 <div className="flex justify-center gap-5 py-1">
                     <button className={`py-2 px-4 rounded flex ${
                     (currentPage == 1) ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-primary-blue'

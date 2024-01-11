@@ -1,11 +1,21 @@
 import PocketBase  from "pocketbase"
 import { Paciente, Medicamento } from "@/Procedimientos/interfaces"
 import toast, { Toaster } from 'react-hot-toast';
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-const pb = new PocketBase('https://doc-note.pockethost.io')
+export const pb = new PocketBase('https://doc-note.pockethost.io')
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
 
+export async function getUser(cookieStore: ReadonlyRequestCookies) {
+    const cookie = cookieStore.get('pb_auth');
+    if (!cookie) {
+        return false;
+    }
+
+    pb.authStore.loadFromCookie(cookie?.value || '');
+    return pb.authStore.model;
+}
 
 export async function login(username: string, password: string){
     const authData = await pb.collection('users').authWithPassword(
@@ -16,12 +26,15 @@ export async function login(username: string, password: string){
     console.log(pb.authStore.isValid);
     console.log(pb.authStore.token);
     console.log(pb.authStore.model?.id);
+
+
     window.location.reload()
 
 }
 
 export function logout(){
     pb.authStore.clear()
+    
     window.location.reload()
 }
 
@@ -166,7 +179,7 @@ export async function verifyConsulta(id:string) {
 }
 
 
-export async function getTratamiento(consulta:string){
+export async function getTratamiento(consulta:any){
     const records = await pb.collection('Tratamiento').getList(1, 4, {
         sort: '-created',
         filter: `consulta="${consulta}"`,
@@ -188,5 +201,16 @@ export async function createTratamiento(consulta:any, medicamento:string, indica
 
 export async function deleteTratamiento(id:any) {
     const deleted =  await pb.collection('Tratamiento').delete(id);
+}
+
+export async function getCitas(page:number, perPage:number){
+    const records = await pb.collection('Citas').getList(page, perPage,{
+        sort: '-created',
+        expand:'paciente',
+    });
+
+    return records;
+
+
 }
 
