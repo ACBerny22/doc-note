@@ -80,8 +80,7 @@ export default function ConsultaPage(){
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
                 { Object.prototype.toString.call(consultas[0]) === "[object Object]" ? ( consultas.map((item) => (
                     <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} 
-                    paciente={item.expand.paciente} isVerificada={item.isVerificada}>
-                    </ConsultaTag>
+                    paciente={item.expand.paciente} isVerificada={item.isVerificada} />
                 ))) : null}
             </div>
         </div>
