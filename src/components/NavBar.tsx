@@ -81,7 +81,7 @@ export default function NavBar(){
                             <Link href={'/consultas'}
                             className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
                              transition-all ease-in-out'><FaNotesMedical className="text-2xl"></FaNotesMedical>Consultas</Link>
-                            <Link href={'#'}
+                            <Link href={'/citas'}
                             className='flex gap-2 text-lg p-3 rounded-xl dark:hover:bg-white hover:bg-blue-600 hover:text-white dark:hover:text-gray-800
                              transition-all ease-in-out'><BsBookmarkHeart className="text-2xl"></BsBookmarkHeart>Citas</Link>                    
                         </div>
@@ -143,7 +143,7 @@ export default function NavBar(){
                                     <Link href={'/consultas'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
                                     transition-all ease-in-out flex gap-2 justify-center items-center'><FaNotesMedical className="text-2xl"></FaNotesMedical>Consultas</Link>
-                                    <Link href={'#'} onClick={()=> {setisMenuOn(!isMenuOn)}}
+                                    <Link href={'/citas'} onClick={()=> {setisMenuOn(!isMenuOn)}}
                                     className='text-lg p-3 rounded-xl hover:bg-blue-600 hover:text-white
                                     transition-all ease-in-out flex gap-2 justify-center items-center'><BsBookmarkHeart className="text-2xl"></BsBookmarkHeart>Citas</Link>  
                                 </div>

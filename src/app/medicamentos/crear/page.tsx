@@ -2,10 +2,7 @@
 
 import React, { useState } from 'react';
 import { addMeds } from '@/PocketBase/PocketBase';
-
-interface MedicamentoFormProps {
-  onSubmit: (medicamento: Medicamento) => void;
-}
+import { useRouter } from 'next/navigation';
 
 interface Medicamento {
   nombre: string;
@@ -13,7 +10,10 @@ interface Medicamento {
   presentacion: string;
 }
 
-const MedicamentoForm: React.FC<MedicamentoFormProps> = ({ onSubmit }) => {
+const MedicamentoForm = () => {
+
+  const router = useRouter()
+
   const [medicamento, setMedicamento] = useState<Medicamento>({
     nombre: '',
     gramaje: 0,
@@ -35,6 +35,7 @@ const MedicamentoForm: React.FC<MedicamentoFormProps> = ({ onSubmit }) => {
 
     // También puedes resetear el formulario si lo deseas.
     setMedicamento({ nombre: '', gramaje: 0, presentacion: '' });
+    router.push('/medicamentos')
   };
 
   return (

@@ -70,11 +70,8 @@ export default function Dashboard(){
                         <h1 className="text-xl font-semibold">Citas proximas</h1>
                         <Link href={'/consultas'} className='font-light text-blue-600'>Ver todas</Link>
                     </div>
-                        <div className="grid grid-cols-1 gap-5">
-                            {
-                                consultas.map((item) => (
-                                <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} paciente={item.expand.paciente} isVerificada={item.isVerificada}></ConsultaTag>))
-                            }
+                    <div className="flex items-center justify-center h-full font-bold">
+                        Coming Soon.
                     </div>
                 </div>
             </div>

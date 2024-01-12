@@ -52,8 +52,9 @@ const Component: FC<ComponentProps> = ({}) => {
                     <BiRefresh className="text-4xl text-blue-600"></BiRefresh>
                 </button>
             </div>
-            <div>
-                {citas.map((item) => (<div key={item.id}>{item.id} {item.expand.paciente.nombre}</div>))}
+            <div className='flex items-center justify-center h-full font-bold'>
+                {/*citas.map((item) => (<div key={item.id}>{item.id} {item.expand.paciente.nombre}</div>))*/}
+                <h1>Coming Soon.</h1>
             </div>
         </div>
     )
