@@ -1,5 +1,6 @@
 import PocketBase  from "pocketbase"
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { calculateAge } from "@/Procedimientos/conversiones";
 
 export const pb = new PocketBase(process.env.NEXT_PUBLIC_DB_URL)
 export const isUserValid = pb.authStore.isValid
@@ -95,7 +96,7 @@ export async function createPac(ss:any, user:any) {
         "curp": ss.curp,
         "nombre": ss.nombre,
         "apellidos": ss.apellidos,
-        "edad": ss.edad,
+        "edad": calculateAge(ss.fecha_nac),
         "fecha_nac": ss.fecha_nac + " 10:00:00.123Z",
         "estado_civil": ss.estado_civil,
         "sexo": ss.sexo,
@@ -136,7 +137,7 @@ export async function searchConsultaByDate(fecha: string){
 
 export async function searchConsultaPerPaciente(id: string){
 
-    const records = await pb.collection('Consulta').getFullList({
+    const records = await pb.collection('Consulta').getList(1, 5, {
         sort: '-created',
         filter: `paciente="${id}"`,
     })
@@ -169,6 +170,40 @@ export async function createConsulta(ss: any, user:any) {
     const record = await pb.collection('Consulta').create(data);
 }
 
+export async function createSomat(ss:any, consultaID:any){
+    // example create data
+    const data = {
+        "peso": ss.peso,
+        "talla": ss.talla,
+        "imc": ss.imc,
+        "temperatura": ss.temperatura,
+        "fc": ss.fc,
+        "fr": ss.fr,
+        "ta": ss.ta,
+        "so2": ss.so2,
+        "consulta": consultaID
+    };
+
+    const record = await pb.collection('somatometria').create(data);
+}
+
+export async function editSomat(ss:any, somatID:any){
+    // example create data
+    const data = {
+        "peso": ss.peso,
+        "talla": ss.talla,
+        "imc": ss.imc,
+        "temperatura": ss.temperatura,
+        "fc": ss.fc,
+        "fr": ss.fr,
+        "ta": ss.ta,
+        "so2": ss.so2,
+        "consulta": ss.consulta
+    };
+
+    const record = await pb.collection('somatometria').update(somatID, data);
+}
+
 export async function verifyConsulta(id:string) {
     const data = {
         "isVerificada": true,
@@ -187,6 +222,13 @@ export async function getTratamiento(consulta:any){
 
     return records;
 }
+
+export async function getSomatometria(consulta:any){
+    const record = await pb.collection('somatometria').getFirstListItem(`consulta="${consulta}"`);
+
+    return record;
+}
+
 
 export async function getTratamientoWithConsulta(consulta:any){
     const records = await pb.collection('Tratamiento').getList(1, 4, {

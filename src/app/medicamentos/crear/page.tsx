@@ -17,10 +17,10 @@ const MedicamentoForm = () => {
   const [medicamento, setMedicamento] = useState<Medicamento>({
     nombre: '',
     gramaje: 0,
-    presentacion: '',
+    presentacion: 'Tabletas',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
     setMedicamento((prevMedicamento) => ({
       ...prevMedicamento,
@@ -34,7 +34,7 @@ const MedicamentoForm = () => {
     await addMeds(medicamento)
 
     // También puedes resetear el formulario si lo deseas.
-    setMedicamento({ nombre: '', gramaje: 0, presentacion: '' });
+    setMedicamento({ nombre: '', gramaje: 0, presentacion: 'Tabletas' });
     router.push('/medicamentos')
   };
 
@@ -60,7 +60,7 @@ const MedicamentoForm = () => {
             Gramaje:
             </label>
             <input
-            type="number"
+            type="text"
             id="gramaje"
             name="gramaje"
             value={medicamento.gramaje}
@@ -73,15 +73,25 @@ const MedicamentoForm = () => {
             <label htmlFor="presentacion" className="block text-gray-700 font-bold mb-2">
             Presentación:
             </label>
-            <input
-            type="text"
-            id="presentacion"
-            name="presentacion"
-            value={medicamento.presentacion}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
-            required
-            />
+            <select
+              id="presentacion"
+              name="presentacion"
+              value={medicamento.presentacion}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+              required
+            >
+              {/* Add your options here */}
+              <option value="Tabletas">Tabletas</option>
+              <option value="Sol. Iny.">Sol. Iny.</option>
+              <option value="Suspensión">Suspensión</option>
+              <option value="Cápsulas">Cápsulas</option>
+              <option value="Polvo">Polvo</option>
+              <option value="Spray Nasal">Spray Nasal</option>
+              <option value="Otro">Otro</option>
+
+              {/* Add more options as needed */}
+            </select>
         </div>
         <button
             type="submit"

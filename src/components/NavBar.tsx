@@ -68,7 +68,7 @@ export default function NavBar(){
             <div className={` `}>
                 <div className="p-5 flex gap-10 justify-between mx-0 lg:mx-10">
                     <div>
-                        <Link href={'/dashboard'}><p className="text-3xl mt-2 font-extrabold"><span className="font-light">D o c</span> N o t e</p></Link>
+                        <Link href={'/dashboard'}><p className="text-3xl mt-2 font-extrabold"><span className="font-light">Doc</span>Note</p></Link>
                     </div>
                         {!isMobile ?      
                         <div className="flex gap-8 font-medium">

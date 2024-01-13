@@ -54,7 +54,7 @@ export default function Medicamentos(){
             <div className="flex gap-16 flex-col px-5 py-12 md:px-16">
                 <Toaster></Toaster>
                 <h1 className="text-4xl font-light">Medicamentos</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-10">
                     <MedAddButton></MedAddButton>
                     {meds.map((item) => (
                         <MedTag key={item.id} id={item.id} nombre={item.nombre} gramaje={item.gramaje} 

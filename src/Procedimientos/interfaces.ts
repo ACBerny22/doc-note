@@ -12,6 +12,19 @@ export interface Paciente{
     id:string
 }
 
+export interface Somatometria{
+    id:string
+    peso: number,
+    talla: string,
+    imc: number,
+    temperatura: number,
+    fc: number,
+    fr: number,
+    ta: number,
+    so2: number,
+    consulta: string
+}
+
 export interface ExpandPaciente {
     paciente:Paciente
 }
@@ -20,7 +33,7 @@ export interface ExpandPaciente {
 export interface Medicamento{
     id:string
     nombre:string
-    gramaje:number
+    gramaje:string
     presentacion:string
 }
 

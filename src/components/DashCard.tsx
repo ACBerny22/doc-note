@@ -18,7 +18,7 @@ const DashCard: FC<DashCardProps> = ({total, type, icon, color}) => {
       if (contador < total) {
         const intervalId = setInterval(() => {
           setContador((prevContador) => prevContador + 1);
-        }, 100);
+        }, 15);
   
         return () => clearInterval(intervalId);
       }

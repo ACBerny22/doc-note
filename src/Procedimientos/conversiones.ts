@@ -13,7 +13,7 @@ export function formatDateToFullDate(dateString: string): string {
     const seconds: number = date.getSeconds();
   
     // Assemble the full date format
-    const fullDate: string = `${day} ${month} ${year}`;
+    const fullDate: string = `${day} / ${month} / ${year}`;
   
     return fullDate;
   }
@@ -22,3 +22,17 @@ export function formatDateToFullDate(dateString: string): string {
   const dateStr: string = "2023-04-26T12:34:56";
   const fullDateStr: string = formatDateToFullDate(dateStr);
   console.log(fullDateStr);
+
+
+export function calculateAge(birthdate: string): number {
+  const birthdateObj = new Date(birthdate);
+  const now = new Date();
+
+  // Calculate the difference in milliseconds
+  const ageInMillis = now.getTime() - birthdateObj.getTime();
+
+  // Convert the age from milliseconds to years
+  const ageInYears = Math.floor(ageInMillis / (365.25 * 24 * 60 * 60 * 1000));
+
+  return ageInYears;
+}

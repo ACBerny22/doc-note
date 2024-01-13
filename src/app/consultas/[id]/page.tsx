@@ -1,8 +1,8 @@
 'use client'
 
 import { FC, useEffect, useState } from 'react'
-import { getSingleConsulta, getTratamiento, model } from '@/PocketBase/PocketBase'
-import {Consulta, Tratamiento} from '@/Procedimientos/interfaces'
+import { getSingleConsulta, getSomatometria, getTratamiento, model } from '@/PocketBase/PocketBase'
+import {Consulta, Somatometria, Tratamiento} from '@/Procedimientos/interfaces'
 import { formatDateToFullDate } from '@/Procedimientos/conversiones'
 import TratAddButton from '@/components/TratAddButton'
 import MedTagInfo from '@/components/MedTagInfo'
@@ -13,6 +13,7 @@ import LoadingScreen from '@/components/LoadingScreen'
 import { verifyConsulta } from "@/PocketBase/PocketBase";
 import Link from 'next/link'
 import { GrAddCircle } from 'react-icons/gr'
+import { BiEdit } from 'react-icons/bi'
 import { MdAdd } from 'react-icons/md'
 
 const Component: FC = ({params} : any) => {
@@ -20,8 +21,10 @@ const Component: FC = ({params} : any) => {
     const [consulta, setConsulta] = useState<Consulta>();
     const [domLoaded, setDomLoaded] = useState(false)
     const [tratamiento, setTratamiento] = useState<Tratamiento[]>([]);
+    const [somatometria, setSomatometria] = useState<Somatometria>();
     const [isVerificada, setIsVerificada] = useState<boolean>(false);
     const [addActive, setAddActive] = useState<boolean>(false);
+    const [exists, setExists] = useState(false)
 
     const router = useRouter()
 
@@ -29,17 +32,27 @@ const Component: FC = ({params} : any) => {
         async function load(){
             const data:any = await getSingleConsulta(params.id);
             const data2:any = await getTratamiento(params.id)
+
+            try{
+                const data3:any = await getSomatometria(params.id)
+                setSomatometria(data3)
+                console.log(data3);
+                setExists(true)
+            }catch(error){
+                console.log("Not yet!!")
+            }
+
             setConsulta(data);
             setTratamiento(data2.items)
-            
+
             setIsVerificada(data.isVerificada)
-            console.log(data);
             console.log(data.isVerificada)
 
             setAddActive(true)
             setDomLoaded(true);
 
         }
+        //console.log(exists)
         setIsVerificada(true)
         load();
 
@@ -84,47 +97,59 @@ const Component: FC = ({params} : any) => {
                         <h2 className='text-lg font-medium'>Exploracion Fisica:</h2>
                         <p className='text-slate-700'>{consulta?.exp_fisica}</p>
                     </div>
+                    <div>
+                        <h2 className='text-lg font-medium'>Diagnostico:</h2>
+                        <p className='text-slate-700'>{consulta?.diagnostico}</p>
+                    </div>
                 </div>
             </div>    
             <div className='flex flex-col gap-7'>
                 <div className='flex gap-5'>
-                    <h1 className='text-2xl font-semibold'>Somatometria:</h1>     
-                    <button className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
-                        <MdAdd className='mt-1 text-xl text-white'></MdAdd>
-                    </button>
+                    <h1 className='text-2xl font-semibold'>Somatometria:</h1>
+                    {!isVerificada && !exists &&
+                    <Link href={{pathname:'/somatometria/crear', query:{consID: params.id}}} className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
+                        <MdAdd className='text-2xl text-white'></MdAdd>
+                    </Link>
+                    }
+                    {
+                        (!isVerificada && exists) && 
+                        <Link href={{pathname:'/somatometria/editar', query:{somatID: somatometria?.id, consultaID: params.id}}} className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
+                            <BiEdit className='text-2xl text-white'></BiEdit>
+                        </Link>
+                    }
                 </div>
                 <div className='grid grid-flow-col grid-rows-4 grid-cols-3 gap-5'>
                     <div>
                         <h2 className='text-lg font-medium'>Peso:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.peso}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>Talla:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.talla}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>IMC:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.imc}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>Temperatura:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.temperatura}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>FC:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.fc}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>FR:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.fr}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>TA:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.ta}</p>
                     </div>
                     <div>
                         <h2 className='text-lg font-medium'>SO2:</h2>
-                        <p className='text-slate-700'>000</p>
+                        <p className='text-slate-700'>{somatometria?.so2}</p>
                     </div>                       
                 </div>
             </div>
@@ -132,10 +157,14 @@ const Component: FC = ({params} : any) => {
             <div className='grid grid-col grid-rows-2 gap-10 p-20'>
                 <Link href={
                     {
-                        pathname:`/document/${consulta?.id}`,
+                        pathname:`/document/receta/${consulta?.id}`,
                     }
-                } className='text-white p-4 rounded-lg bg-blue-600 text-center'>Generar Receta</Link>
-                <button className='text-white p-4 rounded-lg bg-blue-600'>Generar Resumen Clinico</button>
+                } className='text-white p-4 rounded-lg bg-blue-600 text-center mt-1'>Generar Receta</Link>
+                <Link href={
+                    {
+                        pathname:`/document/resumen/${consulta?.id}`,
+                    }
+                } className='text-white p-4 rounded-lg bg-blue-600 text-center mt-1'>Generar Resumen Clínico</Link>
             </div>
             }
         </div>

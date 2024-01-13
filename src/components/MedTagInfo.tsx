@@ -8,11 +8,13 @@ import {BiInjection} from 'react-icons/bi'
 import {MdDelete, MdEdit} from 'react-icons/md'
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from "next/navigation";
+import { FaBottleDroplet } from "react-icons/fa6";
+
 
 interface MedTagInfoProps {
     id: string;
     nombre: string;
-    gramaje: number;
+    gramaje: string;
     presentacion: string;
     indicaciones:string;
     // Add more props as needed
@@ -52,10 +54,13 @@ interface MedTagInfoProps {
       <div className="flex shadow-lg rounded-xl bg-white hover:-translate-y-3 transition-all ease-out justify-between group">
         <div className="flex">
           <div className={`flex rounded-tl-lg rounded-bl-lg justify-center items-center p-3 
-          ${presentacion === "Capsulas" ? "bg-green-600/70" : presentacion === "Tabletas" ? "bg-blue-600/90" :  
-            presentacion === "Inyectable" ? "bg-orange-600/70" : "bg-accent-blue"}`}>
-            {presentacion === "Tabletas" ? <TbPills className='text-3xl text-white'/> : 
-              presentacion === "Capsulas" ? <CgPill className='text-3xl text-white'/> : <BiInjection className='text-3xl text-white'/>}
+          ${presentacion === "Cápsulas" ? "bg-green-600/70" : presentacion === "Tabletas" ? "bg-blue-600/90" :  
+          presentacion === "Sol. Iny." ? "bg-orange-600/70" : 
+          (presentacion === "Suspensión" || presentacion === "Jarabe") ? "bg-purple-600/70" : "bg-blue-600/90"}`}>
+          {presentacion === "Tabletas" ? <TbPills className='text-3xl text-white'/> : 
+            presentacion === "Cápsulas" ? <CgPill className='text-3xl text-white'/> :
+            (presentacion === "Suspensión" || presentacion === "Jarabe")  ? <FaBottleDroplet className='text-3xl text-white'/> : 
+            <BiInjection className='text-3xl text-white'/>}
           </div>
           <div className="p-4">
             <div className="flex justify-between">

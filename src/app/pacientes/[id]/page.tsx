@@ -26,8 +26,8 @@ export default function Pacientes({params} : pageProps){
         setPaciente(data);
 
         const data2:any = await searchConsultaPerPaciente(params.id);
-        console.log(data2)
-        setConsultas(data2)
+        console.log(data2.items)
+        setConsultas(data2.items)
     }
 
     useEffect(() => {
@@ -83,7 +83,7 @@ export default function Pacientes({params} : pageProps){
                     <>
                         {consultas.map((item) => (
                         <div key={item.id} className='shadow-lg p-3 rounded-xl'>
-                            <p className="text-lg">{formatDateToFullDate(item.fecha.slice(0,10))}</p>
+                            <p className="text-lg">{formatDateToFullDate(item.fecha!)}</p>
                             <p className="text-sm text-slate-500 font-light">{item.id}</p>
                             <div className="mt-5 text-sm text-blue-400 underline">
                                 <Link href={`/consultas/${item.id}`}>Ver detalles</Link>

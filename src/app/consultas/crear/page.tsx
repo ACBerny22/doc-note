@@ -84,6 +84,7 @@ const Component: FC<ComponentProps> = ({}) => {
             Fecha:
           </label>  
           <input
+            required
             type="date"
             id="fecha"
             name="fecha"
@@ -97,6 +98,7 @@ const Component: FC<ComponentProps> = ({}) => {
             Paciente:
           </label>
           <input
+            required
             type="text"
             id="paciente"
             name="paciente"

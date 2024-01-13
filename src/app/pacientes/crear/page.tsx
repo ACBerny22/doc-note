@@ -5,6 +5,7 @@ import {useState} from 'react'
 import { createPac, model } from '@/PocketBase/PocketBase'
 import { Paciente } from '@/Procedimientos/interfaces'
 import toast, { Toaster } from 'react-hot-toast';
+import { calculateAge } from '@/Procedimientos/conversiones'
 
 interface FormValues {
   curp: string;
@@ -20,7 +21,7 @@ const initialFormValues: FormValues = {
   curp: '',
   nombre: '',
   apellidos: '',
-  sexo: '',
+  sexo: 'F',
   fecha_nac: '',
   edad: 0,
   estado_civil: '',
@@ -41,10 +42,12 @@ const NewRecordForm: React.FC = () => {
     event.preventDefault();
     // Here you can handle the form submission and save the new record to a database or perform other actions.
     console.log(formValues);
+    
     await createPac(formValues, model?.id)
       .then(()=> toast.success('Paciente insertado con exito'))
       .catch(() => toast.error('Hubo un error en el registro'))
       .finally()
+      
     // Reset the form after submission
     setFormValues(initialFormValues);
   };
@@ -96,17 +99,17 @@ const NewRecordForm: React.FC = () => {
         </div>
         <div  className="mb-4">
           <label htmlFor="curp" className="block text-gray-700 font-bold mb-2">
-            Edad:
+            Fecha de Nacimiento (yyyy/mm/dd):
           </label>
-          <input type="number" name="edad" value={formValues.edad} onChange={handleChange} 
+          <input type="text" name="fecha_nac" value={formValues.fecha_nac} onChange={handleChange}
            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
            />
         </div>
         <div  className="mb-4">
           <label htmlFor="curp" className="block text-gray-700 font-bold mb-2">
-            Fecha de Nacimiento:
+            Edad:
           </label>
-          <input type="date" name="fecha_nac" value={formValues.fecha_nac} onChange={handleChange}
+          <input type="number" name="edad" value={calculateAge(formValues.fecha_nac)}  onChange={handleChange}
            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-300"
            />
         </div>
