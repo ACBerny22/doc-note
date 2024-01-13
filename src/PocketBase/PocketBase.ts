@@ -97,7 +97,7 @@ export async function createPac(ss:any, user:any) {
         "nombre": ss.nombre,
         "apellidos": ss.apellidos,
         "edad": calculateAge(ss.fecha_nac),
-        "fecha_nac": ss.fecha_nac + " 10:00:00.123Z",
+        "fecha_nac": ss.fecha_nac.replace(/\//g, "-") + " 10:00:00.123Z",
         "estado_civil": ss.estado_civil,
         "sexo": ss.sexo,
         "user": [

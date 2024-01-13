@@ -24,7 +24,7 @@ const initialFormValues: FormValues = {
   sexo: 'F',
   fecha_nac: '',
   edad: 0,
-  estado_civil: '',
+  estado_civil: 'C',
 };
 
 const NewRecordForm: React.FC = () => {
