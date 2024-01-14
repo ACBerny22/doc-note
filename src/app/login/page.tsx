@@ -19,7 +19,7 @@ export default function Login(){
     e.preventDefault();
     // Call the onSubmit callback with the entered username and password
     await login(username, password).catch(() => toast.error('Error en las credenciales.'))
-    setCookie('pb_auth', pb.authStore.exportToCookie({httpOnly:true}));
+    setCookie('pb_auth', pb.authStore.exportToCookie({httpOnly:true}), { path: '/' });
 
 
   };

@@ -17,10 +17,11 @@ interface MedTagInfoProps {
     gramaje: string;
     presentacion: string;
     indicaciones:string;
+    isVerificada:boolean
     // Add more props as needed
   }
 
-  const MedTagInfo: React.FC<MedTagInfoProps> = ({ id, nombre, gramaje, presentacion, indicaciones }) => {
+  const MedTagInfo: React.FC<MedTagInfoProps> = ({ id, nombre, gramaje, presentacion, indicaciones, isVerificada }) => {
 
     const router = useRouter()
 
@@ -73,12 +74,15 @@ interface MedTagInfoProps {
             </div>
           </div>
         </div>
+        {
+        !isVerificada &&
         <div className="flex flex-col gap-10 justify-center items-center p-2 text-slate-500/80">
           <button onClick={confirmation}>
             <MdDelete className="text-2xl child group-hover:text-red-500/80"/>
           </button>
           {indicaciones == null ?  <MdEdit className="text-2xl child group-hover:text-blue-500"/> :  null}
         </div>
+        }
 
       </div>
     );

@@ -96,7 +96,7 @@ const MedicamentoForm = () => {
         <button
             type="submit"
             className='bg-blue-600 p-4 text-white font-semibold rounded-xl
-            hover:bg-blue-700'
+            hover:bg-blue-700 w-full'
             >
             Guardar
         </button>

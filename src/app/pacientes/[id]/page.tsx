@@ -1,12 +1,14 @@
 'use client'
 
-import { getSinglePac, isUserValid, searchConsultaPerPaciente } from "@/PocketBase/PocketBase"
+import { getSinglePac, isUserValid, searchConsultaByDate, searchConsultaByDateAndPaciente, searchConsultaPerPaciente } from "@/PocketBase/PocketBase"
 import {useEffect, useState} from 'react'
 import { formatDateToFullDate } from "@/Procedimientos/conversiones"
 import { Paciente, Consulta } from "@/Procedimientos/interfaces"
 import {HiDocumentAdd} from 'react-icons/hi'
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { MdDelete, MdEdit } from "react-icons/md"
+import toast from "react-hot-toast"
 
 interface pageProps {
     params:{
@@ -20,6 +22,7 @@ export default function Pacientes({params} : pageProps){
 
     const[paciente, setPaciente] = useState<Paciente>();
     const[consultas, setConsultas] = useState<Consulta[]>([]);
+    const [searchTerm, setSearchTerm] = useState('')
 
     async function load(){
         const data:any = await getSinglePac(params.id);
@@ -29,6 +32,20 @@ export default function Pacientes({params} : pageProps){
         console.log(data2.items)
         setConsultas(data2.items)
     }
+
+
+    async function findOne() {
+        const data:any = await searchConsultaByDateAndPaciente(searchTerm, params.id).catch(() => 
+        toast.error("Fecha no valida")) as unknown as Consulta;
+        setConsultas(data)
+        console.log(data)
+    }
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+        await findOne();
+    }
+
 
     useEffect(() => {
         load();
@@ -63,8 +80,14 @@ export default function Pacientes({params} : pageProps){
                     <p className="font-semibold text-slate-700">{paciente?.estado_civil}</p>
                 </div>
                 <div className="flex gap-10">
-                    <button className="p-3 rounded-lg bg-blue-600 text-white">Editar</button>
-                    <button className="p-3 rounded-lg bg-red-500/90 text-white">Eliminar</button>
+                    <button className="p-3 rounded-lg bg-blue-600 text-white flex gap-2">
+                        <MdEdit className="text-xl"></MdEdit>
+                        Editar
+                    </button>
+                    <button className="p-3 rounded-lg bg-red-500/90 text-white flex gap-2">
+                        <MdDelete className="text-xl"></MdDelete>
+                        Eliminar
+                    </button>
                 </div>
                
             </div>
@@ -79,6 +102,20 @@ export default function Pacientes({params} : pageProps){
                         <HiDocumentAdd className="text-2xl"></HiDocumentAdd>
                     Crear nueva consulta
                 </Link>
+                <form className="flex gap-5 w-full" onSubmit={handleSubmit}>
+                        <input
+                        type="date"
+                        required={true}
+                        placeholder="Buscar por CURP"
+                        className="p-2  w-full bg-zinc-100 dark:bg-gray-600 rounded-lg 
+                        text-zinc-700 focus:outline-none"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <button type="submit"
+                            className="bg-blue-600 p-3 text-white rounded-xl">Buscar
+                        </button>
+                </form>
                 {consultas.length > 0 ? (
                     <>
                         {consultas.map((item) => (
@@ -94,9 +131,9 @@ export default function Pacientes({params} : pageProps){
                     </>
 
                 ) : (
-                        <div className="max-w-sm mx-auto font-bold text-xl text-slate-500">
-                            No existen consultas.
-                        </div>
+                    <div className="max-w-sm mx-auto font-bold text-xl text-slate-500">
+                        No existen consultas.
+                    </div>
                 )}
                
             </div>

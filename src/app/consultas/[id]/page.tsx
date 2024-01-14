@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { GrAddCircle } from 'react-icons/gr'
 import { BiEdit } from 'react-icons/bi'
 import { MdAdd } from 'react-icons/md'
+import { FaNotesMedical } from 'react-icons/fa'
 
 const Component: FC = ({params} : any) => {
     
@@ -69,19 +70,37 @@ const Component: FC = ({params} : any) => {
     {domLoaded ?
     <div className='flex flex-col gap-16 p-10'>
         <Toaster></Toaster>
-        <div className='flex flex-col md:flex-row gap-5'>
+        <div className='flex flex-col lg:flex-row gap-5'>
             <div>
                 <h1 className='text-3xl font-medium'>Consulta: {formatDateToFullDate(consulta?.fecha!)}</h1>
+                
             </div>
             <div>
                 <button onClick={handleVerify} disabled={isVerificada ? true : false}
-                className='py-1 px-3 bg-red-500 text-white rounded-lg flex gap-2 hover:bg-red-600 transition-all disabled:bg-green-400'>
+                className='py-2 px-3 bg-red-500 text-white rounded-lg flex gap-2 hover:bg-red-600 
+                transition-all disabled:bg-green-400'>
                     <GoVerified className='text-2xl'></GoVerified>
                     <span className='text-lg'>{isVerificada ? "Verificada" : "No Verificada"}</span>
                 </button>
             </div>
+            {isVerificada &&
+                <div className='flex flex-row gap-5'>
+                    <Link href={
+                        {
+                            pathname:`/document/receta/${consulta?.id}`,
+                        }
+                    } className='text-white py-2 px-3 rounded-lg bg-blue-600 text-center flex gap-2'>
+                         <FaNotesMedical className="text-2xl"> </FaNotesMedical>Generar Receta</Link>
+                    <Link href={
+                        {
+                            pathname:`/document/resumen/${consulta?.id}`,
+                        }
+                    } className='text-white py-2 px-3 rounded-lg bg-blue-600 text-center flex gap-2'> 
+                    <FaNotesMedical className="text-2xl"> </FaNotesMedical>Generar Resumen Clínico</Link>
+                </div>
+                }
         </div>
-        <div className='grid grid-flow-row xl:grid-cols-3 gap-16'>
+        <div className='grid grid-flow-row xl:grid-cols-2 gap-16'>
             <div className='flex flex-col gap-7'> 
                 <h1 className='text-2xl font-semibold'>Detalles:</h1>
                 <div className='grid grid-flow-row gap-5'>
@@ -107,13 +126,16 @@ const Component: FC = ({params} : any) => {
                 <div className='flex gap-5'>
                     <h1 className='text-2xl font-semibold'>Somatometria:</h1>
                     {!isVerificada && !exists &&
-                    <Link href={{pathname:'/somatometria/crear', query:{consID: params.id}}} className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
+                    <Link href={{pathname:'/somatometria/crear', query:{consID: params.id}}} 
+                    className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
                         <MdAdd className='text-2xl text-white'></MdAdd>
                     </Link>
                     }
                     {
                         (!isVerificada && exists) && 
-                        <Link href={{pathname:'/somatometria/editar', query:{somatID: somatometria?.id, consultaID: params.id}}} className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
+                        <Link href={{pathname:'/somatometria/editar', 
+                        query:{somatID: somatometria?.id, consultaID: params.id}}}
+                         className='bg-blue-600 text-white p-2 rounded-lg flex gap-2'>
                             <BiEdit className='text-2xl text-white'></BiEdit>
                         </Link>
                     }
@@ -153,28 +175,16 @@ const Component: FC = ({params} : any) => {
                     </div>                       
                 </div>
             </div>
-            {isVerificada &&
-            <div className='grid grid-col grid-rows-2 gap-10 p-20'>
-                <Link href={
-                    {
-                        pathname:`/document/receta/${consulta?.id}`,
-                    }
-                } className='text-white p-4 rounded-lg bg-blue-600 text-center mt-1'>Generar Receta</Link>
-                <Link href={
-                    {
-                        pathname:`/document/resumen/${consulta?.id}`,
-                    }
-                } className='text-white p-4 rounded-lg bg-blue-600 text-center mt-1'>Generar Resumen Clínico</Link>
-            </div>
-            }
+            
         </div>
         <div>
             <h1 className='text-3xl font-medium mb-10'>Tratamiento</h1>
             <div className='grid grid-cols-1 gap-5 lg:grid-cols-3'>
                 {!isVerificada && <TratAddButton id={params.id} isVerificada={isVerificada} isActive={addActive}></TratAddButton>}
                 {tratamiento.map((item) => (
-                    <MedTagInfo key={item.id} id={item.id} nombre={item.expand.medicamento.nombre} gramaje={item.expand.medicamento.gramaje} 
-                    presentacion={item.expand.medicamento.presentacion} indicaciones={item.indicaciones}></MedTagInfo>
+                    <MedTagInfo key={item.id} id={item.id} nombre={item.expand.medicamento.nombre}
+                    gramaje={item.expand.medicamento.gramaje} presentacion={item.expand.medicamento.presentacion} 
+                    indicaciones={item.indicaciones} isVerificada = {isVerificada}></MedTagInfo>
                 ))}
             </div>
         </div>

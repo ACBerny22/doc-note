@@ -70,14 +70,13 @@ export default function ConsultaPage(){
                         <button type="submit"
                             className="bg-blue-600 p-3 text-white rounded-xl">Buscar
                         </button>
-                        
                 </form>
                 <button onClick={async () => { await load()}}>
                     <BiRefresh className="text-4xl text-blue-600"></BiRefresh>
                 </button>
             </div>
       
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
                 { Object.prototype.toString.call(consultas[0]) === "[object Object]" ? ( consultas.map((item) => (
                     <ConsultaTag key={item.id} id={item.id} fecha={item.fecha} 
                     paciente={item.expand.paciente} isVerificada={item.isVerificada} />

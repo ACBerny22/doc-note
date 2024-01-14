@@ -1,10 +1,10 @@
 import PocketBase  from "pocketbase"
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { calculateAge } from "@/Procedimientos/conversiones";
-
 export const pb = new PocketBase(process.env.NEXT_PUBLIC_DB_URL)
 export const isUserValid = pb.authStore.isValid
 export const model = pb.authStore.model
+
 
 export async function getUser(cookieStore: ReadonlyRequestCookies) {
     const cookie = cookieStore.get('pb_auth');
@@ -33,7 +33,6 @@ export async function login(username: string, password: string){
 
 export function logout(){
     pb.authStore.clear()
-    
     window.location.reload()
 }
 
@@ -128,6 +127,21 @@ export async function searchConsultaByDate(fecha: string){
     const records = await pb.collection('Consulta').getFullList({
         sort: '-created',
         filter: `fecha~"${fecha}"`,
+        expand:'paciente'
+
+    })
+
+    return records;
+}
+
+export async function searchConsultaByDateAndPaciente(fecha: string, paciente:String){
+
+    fecha = fecha + " 10:00:00"
+    console.log(fecha)
+
+    const records = await pb.collection('Consulta').getFullList({
+        sort: '-created',
+        filter: `fecha~"${fecha}" && paciente~"${paciente}" `,
         expand:'paciente'
 
     })

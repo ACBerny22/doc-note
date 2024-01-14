@@ -49,11 +49,10 @@ export default function NavBar(){
       }, []);
     
     async function handleLogout(){
-        console.log("logout")
-        removeCookie("pb_auth")
+        removeCookie("pb_auth", { path: '/' })
         setIsDropdownOpen(false);
         setisMenuOn(false);
-        await logout(); 
+        logout(); 
 
     }
 

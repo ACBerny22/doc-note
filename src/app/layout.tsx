@@ -5,7 +5,6 @@ import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
 import {Outfit, Manrope, Wix_Madefor_Display, Lato} from 'next/font/google'
 
-
 const inter = Inter({ subsets: ['latin'] })
 
 const open = Manrope({
@@ -31,8 +30,8 @@ export default function RootLayout({
     <html lang="en">
   
       <body className={open.className}>
-        <NavBar/>
-        {children}
+          <NavBar/>
+          {children}
       </body>
     </html>
   )
