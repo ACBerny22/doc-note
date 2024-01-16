@@ -20,6 +20,8 @@ export default function Pacientes({params} : pageProps){
 
     const router = useRouter();
 
+
+    
     const[paciente, setPaciente] = useState<Paciente>();
     const[consultas, setConsultas] = useState<Consulta[]>([]);
     const [searchTerm, setSearchTerm] = useState('')
